@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><br />
+<!DOCTYPE cross-domain-policy SYSTEM<br />
+    "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd" ><br />
+<cross-domain-policy><br />
+    <site-control permitted-cross-domain-policies="all" /><br />
+    <allow-access-from domain="*" /><br />
+    <allow-http-request-headers-from domain="*" headers="*"/><br />
+</cross-domain-policy><br />

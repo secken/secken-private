@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>私有云管理平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <!-- bootstrap-duallistbox -->
+    <link rel="stylesheet" href="plugins/bootstrap-duallistbox/bootstrap-duallistbox.css">
+
+    <!-- bootstrap-switch -->
+    <link rel="stylesheet" href="plugins/switch/bootstrap-switch.min.css">
+
+    <!-- uploadfly css -->
+    <link rel="stylesheet" href="plugins/uploadify/uploadify.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>A</b>LT</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Admin</b>LTE</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <span class="hidden-xs" id="show_true_name"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <p>
+                      Alexander Pierce - Web Developer
+                      <small>Member since Nov. 2012</small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="row">
+                      <div class="col-xs-4 text-center">
+                        <a href="#">Followers</a>
+                      </div>
+                      <div class="col-xs-4 text-center">
+                        <a href="#">Sales</a>
+                      </div>
+                      <div class="col-xs-4 text-center">
+                        <a href="#">Friends</a>
+                      </div>
+                    </div><!-- /.row -->
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat" onclick="javascript:seckenPrivate.user.logout();">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>Alexander Pierce</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="button" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>用户</span>
+                <i class="fa fa-fw fa-plus-square-o" data-toggle="modal" data-target="#addGroup"></i>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu" id="group">
+                <li class="active"><a href="/index.html"><i class="fa fa-circle-o"></i>默认组</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="/pages/power.html">
+                <i class="fa fa-files-o"></i>
+                <span>权限</span>
+              </a>
+            </li>
+            <li>
+              <a href="/pages/stats.html">
+                <i class="fa fa-th"></i> <span>统计</span>
+              </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-pie-chart"></i>
+                  <span>日志</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="/pages/logs/auth.html"><i class="fa fa-circle-o"></i>验证日志</a></li>
+                  <li><a href="/pages/logs/op.html"><i class="fa fa-circle-o"></i>操作日志</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>设置</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="/pages/setting/company.html"><i class="fa fa-circle-o"></i>企业信息</a></li>
+                <li><a href="/pages/setting/upgrade.html"><i class="fa fa-circle-o"></i>检查更新</a></li>
+                <li><a href="/pages/setting/service.html"><i class="fa fa-circle-o"></i>服务</a></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+     <div class="content-wrapper">
+       <!-- Content Header (Page header) -->
+       <section class="content-header">
+         <h1>
+           用户
+         </h1>
+       </section>
+
+       <!-- Main content -->
+       <section class="content">
+         <div class="row">
+           <div class="col-xs-12">
+               <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">产品</h3>
+                </div>
+                <div class="box-body">
+                  该组目前拥有<span id="power_count">0</span>个权限，其中有<span id="power_enable_count">0</span>个运行正常
+                  <button type="button" class="btn bg-olive margin"
+                  data-toggle="modal" data-target="#setPower">设置权限</button>
+                </div><!-- /.box-body -->
+              </div>
+
+             <div class="box">
+               <div class="box-header">
+                 <h3 class="box-title">用户详情</h3>
+               </div><!-- /.box-header -->
+               <div class="box-body">
+                 <div style="width:25%;float:left;">
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="wd" class="form-control" placeholder="搜索用户">
+                            <span class="input-group-btn">
+                                <button type="button" name="search" id="search-btn" class="btn btn-flat" onclick="javascript:seckenPrivate.user.search();"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div style="width:75%">
+                    <button type="button" class="btn bg-olive margin"
+                    data-toggle="modal" data-target="#addUser">添加用户</button>
+                    <button type="button" class="btn bg-olive margin"
+                    data-toggle="modal" data-target="#delUser">删除用户</button>
+                    <button type="button" class="btn bg-olive margin"
+                    data-toggle="modal" data-target="#moveUser" onclick="javascript:seckenPrivate.user.group(1);">移动</button>
+                    <input id="file_upload" name="userfile" type="file" multiple="true">
+                </div>
+                 <table id="user" class="table table-bordered table-striped">
+                   <thead>
+                     <tr>
+                       <th>选择</th>
+                       <th>用户名</th>
+                       <th>姓名</th>
+                       <th>手机号</th>
+                       <th>状态</th>
+                       <th>修改时间</th>
+                       <th>操作</th>
+                     </tr>
+                   </thead>
+                   <tbody></tbody>
+                 </table>
+               </div><!-- /.box-body -->
+               <div class="box-footer clearfix" id="pagination">
+                </div>
+             </div><!-- /.box -->
+           </div><!-- /.col -->
+         </div><!-- /.row -->
+       </section><!-- /.content -->
+     </div><!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 2.3.0
+        </div>
+        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+      </footer>
+      <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- jQuery cookie -->
+    <script src="plugins/jQuery/jquery.cookie.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jQueryUI/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+      $('#show_true_name').text($.cookie('true_name'));
+    </script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- Bootstrap-switch -->
+    <script src="plugins/switch/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- uploadfly-->
+    <script src="plugins/uploadify/jquery.uploadify.min.js"></script>
+
+    <script src="controller/secken.js"></script>
+    <script>
+        seckenPrivate.user.import();
+    </script>
+
+<!-- 设置权限弹框 -->
+<div class="modal fade" id="setPower" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               设置权限
+            </h4>
+         </div>
+         <div class="modal-body" style="min-height:200px;">
+             <div class="col-xs-12" style="min-height:100px;">
+                 <h5>可分配权限</h5>
+                 <ul id="pnouse"></ul>
+             </div>
+             <div class="col-xs-12" style="min-height:100px;">
+                 <h5>已分配权限</h5>
+                 <ul id="pused"></ul>
+             </div>
+         </div>
+         <div class="modal-footer">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<!-- 添加用户弹框 -->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               添加新用户
+            </h4>
+         </div>
+         <div class="modal-body">
+                <div class="box-body">
+                    <div id="tip" style="display:none;"></div>
+                  <form role="form">
+                    <!-- 用户名 -->
+                    <div class="form-group">
+                      <label>用户名*</label>
+                      <input type="text" class="form-control" name="user_name">
+                    </div>
+                    <!-- 手机号 -->
+                    <div class="form-group">
+                      <label>手机号*</label>
+                      <input type="text" class="form-control" name="phone">
+                    </div>
+                    <!-- 姓名 -->
+                    <div class="form-group">
+                      <label>姓名*</label>
+                      <input type="text" class="form-control" name="true_name">
+                    </div>
+                  </form>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" name="adduser" onclick="javascript:seckenPrivate.user.add(1);">添加</button>
+                  </div>
+         </div>
+         <div class="modal-footer">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!-- 添加用户-->
+
+<!-- 修改用户弹框 -->
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               修改用户
+            </h4>
+         </div>
+         <div class="modal-body">
+                <div class="box-body">
+                  <div id="e_tip" style="display:none;"></div>
+                  <form role="form" class="form-horizontal">
+                    <!-- 姓名 -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="edit_true_name" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <labal>
+                                <input type="radio" name="edit_status" value=1>
+                                启用
+                            </labal>
+                            <labal>
+                                <input type="radio" name="edit_status" value=0>
+                                禁用
+                            </labal>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">创建时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="edit_create_time" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">上次修改时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="edit_update_time"  disabled>
+                        </div>
+                    </div>
+                    <input type="hidden" name="hidden_userid">
+                  </form>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" name="edituser" onclick="javascript:seckenPrivate.user.edit();">修改</button>
+                  </div>
+         </div>
+         <div class="modal-footer">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!-- 修改用户-->
+
+<!-- 删除用户弹框 -->
+<div class="modal fade" id="delUser" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               删除用户
+            </h4>
+         </div>
+         <div class="modal-body">
+             您确定要删除用户吗?
+         </div>
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="delbtn" onclick="javascript:seckenPrivate.user.delete();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!-- 删除用户-->
+
+<!-- 移动用户弹框 -->
+<div class="modal fade" id="moveUser" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               移动用户到
+            </h4>
+         </div>
+         <div class="modal-body" id="groupItem"></div>
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="movebtn" onclick="javascript:seckenPrivate.user.move();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!-- 移动用户-->
+
+<!-- 添加分组弹框 -->
+<div class="modal fade" id="addGroup" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               添加用户组
+            </h4>
+         </div>
+         <div class="modal-body" id="groupItem">
+             <div id="g_tip" style="display:none;"></div>
+             <form role="form" class="form-horizontal">
+               <div class="form-group">
+                   <label class="col-sm-2 control-label">分组名称</label>
+                   <div class="col-sm-5">
+                       <input type="text" class="form-control" name="group_name">
+                   </div>
+               </div>
+             </form>
+         </div>
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="movebtn" onclick="javascript:seckenPrivate.group.add();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!--添加用户分组-->
+
+<!-- 修改分组弹框 -->
+<div class="modal fade" id="editGroup" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               修改用户组
+            </h4>
+         </div>
+         <div class="modal-body" id="groupItem">
+             <div id="eg_tip" style="display:none;"></div>
+             <form role="form" class="form-horizontal">
+               <div class="form-group">
+                   <label class="col-sm-2 control-label">分组名称</label>
+                   <div class="col-sm-5">
+                       <input type="text" class="form-control" name="edit_group_name">
+                   </div>
+               </div>
+               <input type="hidden" name="e_gid" />
+             </form>
+         </div>
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="movebtn" onclick="javascript:seckenPrivate.group.edit();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!--修改用户分组-->
+
+<!-- 删除分组弹框 -->
+<div class="modal fade" id="delGroup" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               删除用户组信息
+            </h4>
+         </div>
+         <div class="modal-body" id="groupItem">
+             您确定要删除改组吗？
+         </div>
+        <input type="hidden" name="d_gid" />
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="movebtn" onclick="javascript:seckenPrivate.group.delete();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!--删除用户分组-->
+
+<!-- 导入用户等待弹框 -->
+<div class="modal fade" id="waitimport" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               正在导入中
+            </h4>
+         </div>
+         <div class="modal-body" id="groupItem">
+             <div class="progress active">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    <span class="sr-only">20% Complete</span>
+                </div>
+            </div>
+         </div>
+        <input type="hidden" name="d_gid" />
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="movebtn" onclick="javascript:seckenPrivate.group.delete();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!--导入用户等待弹-->
+
+<!-- 导入用户结果 -->
+<div class="modal fade" id="import_result" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close"
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               用户导入结果
+            </h4>
+         </div>
+         <div class="modal-body" id="import_result_tip">
+
+         </div>
+        <input type="hidden" name="d_gid" />
+         <div class="box-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-info pull-right" name="movebtn" onclick="javascript:seckenPrivate.group.delete();">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!--导入用户结果-->
+<script>
+seckenPrivate.checkInstall();
+seckenPrivate.group.power();
+seckenPrivate.user.getGid();
+seckenPrivate.group.getList();
+seckenPrivate.user.getList(1);
+seckenPrivate.user.groupPower();
+</script>
+  </body>
+</html>
