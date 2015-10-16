@@ -63,8 +63,8 @@ class Auth_statistics extends CI_Model {
         return $query->result_array();
     }
 
-    public function insert($insertData){
-        $this->db->insert($this->_main_table, $insertData);
+    public function insert_batch($insertData){
+        $this->db->insert_batch($this->_main_table, $insertData);
         return $this->db->insert_id();
     }
 

@@ -13,6 +13,8 @@ class Index extends API_Controller {
     public function check(){
         $data = array();
 
+        $status = 1;
+
         //输出基本配置信息
         $data['env']['操作系统'] = array(
             'need' => '不限制',
@@ -30,36 +32,66 @@ class Index extends API_Controller {
             'current' => mysqli_get_client_version()
         );
 
+
+        $gd_info = array();
+        if(function_exists('gd_info')){
+            $gd_info = gd_info();
+        }else{
+            $status = 0;
+        }
+
         $data['env']['GD库'] = array(
             'need' => '1.0',
             'best' => '2.0',
-            'current' => gd_info()['GD Version']
+            'current' => isset($gd_info['GD Version']) ? $gd_info['GD Version'] : '未安装'
         );
+
+        $curl_version = array();
+        if(function_exists('curl_version')){
+            $curl_version = curl_version();
+        }else{
+            $status = 0;
+        }
 
         $data['env']['CURL扩展'] = array(
             'need' => '与php版本对应',
             'best' => '与php版本对应',
-            'current' => curl_version()['version']
+            'current' => isset($curl_version['version']) ? $curl_version['version'] : '未安装'
         );
+
+        if(class_exists('ZipArchive')){
+            $current = '已安装';
+        }else{
+            $current = '未安装';
+            $status = 0;
+        }
 
         $data['env']['ZIP扩展'] = array(
             'need'=>'与php版本对应',
             'best' => '与php版本对应',
-            'current' => class_exists('ZipArchive') ? '已安装' : '未安装'
+            'current' => $current
         );
         //检查文件是否可写
         $check_write_file = array();
         $check_write_file = array(
             'db' => APPPATH . 'config/database.php',
             'cache' => APPPATH . 'cache',
-            'logs' => APPPATH . 'logs'
+            'logs' => APPPATH . 'logs',
+            'resources' => dirname(APPPATH) . '/resources'
         );
-
 
         foreach($check_write_file as $item => $file){
 
-            $data['writeable'][$item] = is_writable($file) ? 1 : 0;
+            if(is_writable($file)){
+                $is_writable = 1;
+            }else{
+                $is_writable = 0;
+                $status = 0;
+            }
+            $data['writeable'][$item] = $is_writable;
         }
+
+        $data['allow_next'] = $status;
 
         echo $this->to_api_message(1, 'check_env', $data);
     }
@@ -110,7 +142,6 @@ EOT;
     	file_put_contents(APPPATH . 'config/database.php', $content);
 
         $create = $this->dbforge->create_database($db_name);
-
         if($create){
             $this->to_api_message(1, 'create_database_success');
         }else{

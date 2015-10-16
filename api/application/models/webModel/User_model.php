@@ -24,11 +24,8 @@ class User_model extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->_main_table .' AS u');
         $this->db->join($this->_group_table . ' AS g', 'g.user_id = u.user_id','left');
-        if($is_phone){
-            $this->db->like('u.phone', $wd);
-        }else{
-            $this->db->like('u.true_name', $wd);
-        }
+        $this->db->like('u.phone', $wd);
+        $this->db->like('u.true_name', $wd);
 
         $query = $this->db->get();
 
@@ -108,11 +105,8 @@ class User_model extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->_main_table .' AS u');
         $this->db->join($this->_group_table . ' AS g', 'g.user_id = u.user_id','left');
-        if($is_phone){
-            $this->db->like('u.phone', $wd);
-        }else{
-            $this->db->like('u.true_name', $wd);
-        }
+        $this->db->like('u.phone', $wd);
+        $this->db->or_like('u.true_name', $wd);
 
         $this->db->limit($limit, $offset);
         $query = $this->db->get();

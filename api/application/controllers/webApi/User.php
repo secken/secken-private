@@ -9,6 +9,7 @@ class User extends API_Controller{
         parent::__construct();
 
         $this->load->model('webModel/User_model', 'user');
+        $this->load->library('session');
     }
 
     /*
@@ -51,10 +52,15 @@ class User extends API_Controller{
             $this->to_api_message(0, 'only_admin_login');
         }
 
+        $this->load->model('webModel/Company_model','company');
+        $get = $this->company->get();
+        $company_logo = !empty($get) && !empty($get['logo']) ? $get['logo'] : '';
+
         $session_data = array(
             'user_id' => $user[0]['user_id'],
             'user_name' => $user[0]['user_name'],
-            'true_name' => $user[0]['true_name']
+            'true_name' => $user[0]['true_name'],
+            'company_logo' => $company_logo
         );
 
         $this->session->set_userdata($session_data);
@@ -121,12 +127,15 @@ class User extends API_Controller{
      * @return json
      */
     public function add(){
+        $gid = $this->input->get_post('gid', TRUE);
         $user_name = $this->input->get_post('user_name', TRUE);
         $phone = $this->input->get_post('phone', TRUE);
         $true_name = $this->input->get_post('true_name', TRUE);
         $intro = $this->input->get_post('intro', TRUE);
         $intro = $intro === NULL ? '没有添加简介' : $intro;
         $is_admin = $this->input->get_post('is_admin', TRUE);
+
+        $gid = $gid ? $gid : 1;
 
         if($is_admin == 1){
             //检查管理员是否已经存在
@@ -168,9 +177,17 @@ class User extends API_Controller{
             $this->load->library('Secken', $app_info);
 
             $result = $this->secken->exchangeUid($phone);
+            //var_dump($result);
             $respone_code = $this->secken->getCode();
+            $identity_name = '';
             if($respone_code == 200){
                 $identity_name = $result['uids'][0];
+            }else{
+                $this->to_api_message(0, 'secken_config_error');
+            }
+
+            if(empty($identity_name)){
+                $this->to_api_message(0, 'please_login_on_yangcong');
             }
         }
 
@@ -196,7 +213,7 @@ class User extends API_Controller{
             $insertData = array();
             $insertData = array(
                 'user_id' => $insert_id,
-                'gid' => 1
+                'gid' => $gid
             );
             $insert_id = $this->user_group->insert($insertData);
             if($insert_id > 0){
@@ -234,7 +251,8 @@ class User extends API_Controller{
          $updateData = $where = array();
          $updateData = array(
              'true_name' => $true_name,
-             'is_open' => $open
+             'is_open' => $open,
+             'update_time' => date('Y-m-d H:i:s')
          );
          $where = array(
              'user_id' => $uid
@@ -515,6 +533,9 @@ class User extends API_Controller{
                             $error_row++;
                             $error[] = array(
                                 'row' => $row,
+                                'user_name' => $user_name,
+                                'true_name' => $true_name,
+                                'phone' => $phone,
                                 'error' => $this->lang->line('username_is_exists')
                             );
                             continue;
@@ -527,6 +548,9 @@ class User extends API_Controller{
                             $error_row++;
                             $error[] = array(
                                 'row' => $row,
+                                'user_name' => $user_name,
+                                'true_name' => $true_name,
+                                'phone' => $phone,
                                 'error' => $this->lang->line('phone_invalid')
                             );
                             continue;
@@ -536,6 +560,9 @@ class User extends API_Controller{
                             $error_row++;
                             $error[] = array(
                                 'row' => $row,
+                                'user_name' => $user_name,
+                                'true_name' => $true_name,
+                                'phone' => $phone,
                                 'error' => $this->lang->line('phone_is_exists')
                             );
                             continue;
@@ -546,12 +573,27 @@ class User extends API_Controller{
                             $result = $this->secken->exchangeUid($phone);
                             $respone_code = $this->secken->getCode();
 
+                            $identity_name = '';
                             if($respone_code == 200){
                                 $identity_name = $result['uids'][0];
+                                if(empty($identity_name)){
+                                    $error_row++;
+                                    $error[] = array(
+                                        'row' => $row,
+                                        'user_name' => $user_name,
+                                        'true_name' => $true_name,
+                                        'phone' => $phone,
+                                        'error' => $this->lang->line('please_login_on_yangcong')
+                                    );
+                                    break;
+                                }
                             }else{
                                 $error_row++;
                                 $error[] = array(
                                     'row' => $row,
+                                    'user_name' => $user_name,
+                                    'true_name' => $true_name,
+                                    'phone' => $phone,
                                     'error' => $this->lang->line('secken_config_error')
                                 );
                                 break;
@@ -560,6 +602,9 @@ class User extends API_Controller{
                             $error_row++;
                             $error[] = array(
                                 'row' => $row,
+                                'user_name' => $user_name,
+                                'true_name' => $true_name,
+                                'phone' => $phone,
                                 'error' => $this->lang->line('secken_config_error')
                             );
                             break;

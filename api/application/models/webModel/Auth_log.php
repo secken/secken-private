@@ -23,7 +23,7 @@ class Auth_log extends CI_Model {
         return $query->num_rows();
     }
 
-    public function get_list($where, $limit, $offset){
+    public function get_list($where, $limit = 0, $offset=0){
         $this->db->select('*');
         $this->db->from($this->_main_table);
 
@@ -31,7 +31,10 @@ class Auth_log extends CI_Model {
             $this->db->where($where);
         }
 
-        $this->db->limit($limit, $offset);
+        if($limit){
+            $this->db->limit($limit, $offset);
+        }
+        $this->db->order_by('auth_time', 'desc');
         $query = $this->db->get();
 
         return $query->result_array();

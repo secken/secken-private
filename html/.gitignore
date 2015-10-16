@@ -1,9 +1,0 @@
-*.DS_Store
-*.log
-*.zip
-.idea
-/nbproject/
-/nbproject/private/
-/node_modules/
-TODO
-test.html

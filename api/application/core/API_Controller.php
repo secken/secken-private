@@ -34,10 +34,12 @@ class API_Controller extends CI_Controller
      * @return Bool
      */
     public function is_login(){
+        $this->load->library('session');
         return $this->session->has_userdata('user_id');
     }
 
     public function get_user_info($session_name = ''){
+        $this->load->library('session');
         if(empty($session_name)){
             return $this->session->userdata();
         }else{

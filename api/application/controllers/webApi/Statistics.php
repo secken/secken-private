@@ -79,20 +79,19 @@ class Statistics extends API_Controller{
         $this->load->model('webModel/Auth_statistics','auth_statistics');
 
         //昨天
-        $day_start = strtotime(date('Y-m-d 00:00:00', strtotime('-1 day')));
-        $day_end = strtotime(date('Y-m-d 23:59:59', strtotime('-1 day')));
+        $day_start = date('Y-m-d 00:00:00', strtotime('-1 day'));
+        $day_end = date('Y-m-d 23:59:59', strtotime('-1 day'));
         $day_stat_info = $this->auth_statistics->get_ty_time($day_start, $day_end);
 
         //本周
         $timestamp = time();
         $week_start = date('Y-m-d', $timestamp-86400*date('w',$timestamp)+(date('w',$timestamp)>0?86400:-518400));  ;
-        $week_start = strtotime($week_start);
-        $week_end = $week_start + 518400;
+        $week_end = date('Y-m-d 23:59:59',strtotime($week_start) + 518400);
         $week_stat_info = $this->auth_statistics->get_ty_time($week_start, $week_end);
 
         //本月
-        $month_start = strtotime(date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y"))));
-        $month_end = strtotime(date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("t"),date("Y"))));
+        $month_start = date("Y-m-d H:i:s",mktime(0, 0 , 0,date("m"),1,date("Y")));
+        $month_end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("t"),date("Y")));
         $month_stat_info = $this->auth_statistics->get_ty_time($month_start, $month_end);
 
         $data = array(

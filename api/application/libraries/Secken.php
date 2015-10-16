@@ -16,7 +16,7 @@ class Secken {
     const PUBLIC_BASE_URL       = 'https://api.yangcong.com/v2/';
 
 	//私有云api请求地址
-	const PRIVATE_BASE_URL      = 'http://test-api.yangcong.com/';
+	const PRIVATE_BASE_URL      = 'https://api.sdk.yangcong.com/';
 
     //获取通过洋葱进行验证的二维码
     const QRCODE_FOR_AUTH       = 'qrcode_for_auth';
@@ -185,7 +185,8 @@ class Secken {
              'phone_list' => $phone_json
          );
 
-         $data['signature'] = $this->getSignature($data, true);
+         $data['signature'] = $this->getSignature($data, false);
+         //var_dump($data);
          $url = $this->base_url . self::EXCHANGE_USER;
 
          $ret = $this->request($url, 'POST', $data);
@@ -223,7 +224,7 @@ class Secken {
          $data['signature'] = $this->getSignature($data);
 
          //$url = $this->base_url . self::CHECK_UPGRADE;
-         $url = 'https://new.yangcong.com/'. self::CHECK_UPGRADE;
+         $url = 'https://www.yangcong.com/'. self::CHECK_UPGRADE;
          $ret = $this->request($url, 'POST', $data);
 
          return $this->prettyRet($ret);

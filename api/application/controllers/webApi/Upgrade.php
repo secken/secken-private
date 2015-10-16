@@ -31,7 +31,7 @@ class Upgrade extends API_Controller{
         $this->load->library('Secken', $app_info);
 
         $upgrade = $this->secken->checkUpgrade($dependent_code, $version_code);
-        var_dump($upgrade);
+        //var_dump($upgrade);
         if(is_array($upgrade)){
             $status = isset($upgrade['update']) && $upgrade['update'] == 'NO' ? 0 : 1;
 

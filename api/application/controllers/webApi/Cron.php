@@ -2,7 +2,7 @@
 /**
  * 用户组接口
  */
-class Statistics extends API_Controller{
+class Cron extends API_Controller{
 
     public function __construct(){
         parent::__construct();
@@ -29,58 +29,52 @@ class Statistics extends API_Controller{
 
              $auth_log = $this->auth_log->get_list($where);
              if(!empty($auth_log)){
-                 $auth_data = array();
 
+                 $statis = array();
                  foreach($auth_log as $auth){
-                    $auth_data = array(
-                        'power_id' => $auth['power_id'],
-                        'statistics_time' => date('Y-m-d H:i:s')
-                    );
 
-                    switch($auth_type){
-                        case 1:
-                            $auth_data['click_day_auth_count'] = count($auth_log);
-                        break;
-                        case 2:
-                            $auth_data['hand_day_auth_count'] = count($auth_log);
-                        break;
-                        case 3:
-                            $auth_data['face_day_auth_count'] = count($auth_log);
-                        break;
-                        case 4:
-                            $auth_data['noice_day_auth_count'] = count($auth_log);
-                        break;
+                    if(isset($statis[$auth['power_id']])){
+                        switch($auth_type){
+                            case 1:
+                                $statis[$auth['power_id']]['click_day_auth_count'] += 1;
+                            break;
+                            case 2:
+                                $statis[$auth['power_id']]['hand_day_auth_count'] += 1;
+                            break;
+                            case 3:
+                                $statis[$auth['power_id']]['face_day_auth_count'] += 1;
+                            break;
+                            case 4:
+                                $statis[$auth['power_id']]['noice_day_auth_count'] += 1;
+                            break;
+                        }
+                    }else{
+                        $statis[$auth['power_id']] = array();
+
+                        switch($auth_type){
+                            case 1:
+                                $statis[$auth['power_id']]['click_day_auth_count'] = 1;
+                            break;
+                            case 2:
+                                $statis[$auth['power_id']]['hand_day_auth_count'] = 1;
+                            break;
+                            case 3:
+                                $statis[$auth['power_id']]['face_day_auth_count'] = 1;
+                            break;
+                            case 4:
+                                $statis[$auth['power_id']]['noice_day_auth_count'] = 1;
+                            break;
+                        }
                     }
 
-                    $this->auth_statistics->insert($auth_data);
+                    $statis[$auth['power_id']]['power_id'] = $auth['power_id'];
+                    $statis[$auth['power_id']]['statistics_time'] = date('Y-m-d 23:59:59', strtotime('-1 day'));
                  }
-             }
 
+                 sort($statis);
+
+                 $this->auth_statistics->insert_batch($statis);
+             }
         }
      }
-
-     /**
-      * 统计详情
-      * @param  int $power_id  权限ID
-      * @return json
-      */
-     public function statistics_info(){
-         $power_id = $this->input->post('power_id');
-
-         $this->load->model('webModel/Auth_statistics','auth_statistics');
-         $list = $this->auth_statistics->get_by_power($power_id);
-
-         if(empty($list)){
-             $this->to_api_message(1, 'get_auth_statistics_success', $list);
-         }
-
-         $data = array();
-         foreach($list as $auth){
-             $temp = array();
-             $temp = array(
-
-             );
-         }
-     }
-
 }

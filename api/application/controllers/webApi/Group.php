@@ -155,37 +155,36 @@ class Group extends API_Controller{
 
            $delete = $this->group->delete($where);
            if($delete){
-
                $this->load->model('webModel/Group_power','group_power');
 
                //检查组下是否已分配权限
                $get_group_power = $this->group_power->get($gid);
                if(!empty($get_group_power)){
                    //删除组下面的权限集合
-                   $delete = $this->group_power->delete($where);
-                   if($delete){
-                       //将该组的用户迁移至默认组中
-                       $this->load->model('webModel/User_group','user_group');
-                       $updateData = $where = array();
-                       $updateData = array(
-                           'gid' => 1
-                       );
-                       $where = array(
-                           'gid' => $gid
-                       );
+                   $delete = $this->group_power->delete($gid);
+                   if(!$delete){
+                       $this->add_op_log($op_description, 0);
+                       $this->to_api_message(0, 'delete_group_failed');
+                   }
+               }
 
-                       //检查组下是否有用户
-                       $get_user_group = $this->user_group->get($gid);
-                       if($get_user_group > 0){
-                           $affected = $this->user_group->update($updateData, $where);
-                           if($affected){
-                               $this->add_op_log($op_description, 1);
-                               $this->to_api_message(1, 'delete_group_success');
-                           }else{
-                               $this->add_op_log($op_description, 0);
-                               $this->to_api_message(0, 'delete_group_failed');
-                           }
-                       }
+               //将该组的用户迁移至默认组中
+               $this->load->model('webModel/User_group','user_group');
+               $updateData = $where = array();
+               $updateData = array(
+                   'gid' => 1
+               );
+               $where = array(
+                   'gid' => $gid
+               );
+
+               //检查组下是否有用户
+               $get_user_group = $this->user_group->get($gid);
+               if($get_user_group > 0){
+                   $affected = $this->user_group->update_group($updateData, $where);
+                   if($affected){
+                       $this->add_op_log($op_description, 1);
+                       $this->to_api_message(1, 'delete_group_success');
                    }else{
                        $this->add_op_log($op_description, 0);
                        $this->to_api_message(0, 'delete_group_failed');

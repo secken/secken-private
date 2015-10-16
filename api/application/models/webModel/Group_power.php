@@ -21,6 +21,15 @@ class Group_power extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_by_power_id($power_id){
+        $this->db->select('*');
+        $this->db->from($this->_main_table);
+        $this->db->where('power_id', $power_id);
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function insert($insertData){
         if(empty($insertData)){
             return 0;
@@ -43,12 +52,23 @@ class Group_power extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function delete($gid, $power_ids){
+    public function delete($gid, $power_id = 0){
 
         $this->db->where('gid', $gid);
-        $this->db->where('power_id', $power_ids);
+        if($power_id){
+            $this->db->where('power_id', $power_id);
+        }
 
         $this->db->delete($this->_main_table);
+        //echo $this->db->last_query();
+        return $this->db->affected_rows();
+    }
+
+    public function delete_power($where){
+
+        $this->db->where($where);
+        $this->db->delete($this->_main_table);
+        //echo $this->db->last_query();
         return $this->db->affected_rows();
     }
 }

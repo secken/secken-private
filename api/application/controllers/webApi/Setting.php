@@ -48,6 +48,7 @@ class Setting extends API_Controller{
         $app_key = $this->input->get_post('app_key', TRUE);
 
         $service_type = $this->check_app_info($app_id, $app_key);
+
         if($service_type == 0){
             $this->to_api_message(0, 'app_info_error');
         }
@@ -72,10 +73,8 @@ class Setting extends API_Controller{
         }
 
         if($affected){
-            $this->add_op_log('设置了应用授权信息', 1);
             $this->to_api_message(1, 'set_service_success');
         }else{
-            $this->add_op_log('设置了应用授权信息', 0);
             $this->to_api_message(0, 'set_service_failed');
         }
     }

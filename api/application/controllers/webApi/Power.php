@@ -142,18 +142,26 @@ class Power extends API_Controller{
 
          $delete = $this->power->delete($where);
          if($delete){
+
              $this->load->model('webModel/Group_power', 'group_power');
              $where = array();
              $where = array(
                  'power_id' => $power_id
              );
-             $delete = $this->group_power->delete($where);
-             if($delete){
+
+             $check_power = $this->group_power->get_by_power_id($power_id);
+             if(!empty($check_power)){
+                 $delete = $this->group_power->delete_power($where);
+                 if($delete){
+                     $this->add_op_log($op_description, 1);
+                     $this->to_api_message(1, 'delete_power_success');
+                 }else{
+                     $this->add_op_log($op_description, 0);
+                     $this->to_api_message(0, 'delete_power_failed');
+                 }
+             }else{
                  $this->add_op_log($op_description, 1);
                  $this->to_api_message(1, 'delete_power_success');
-             }else{
-                 $this->add_op_log($op_description, 0);
-                 $this->to_api_message(0, 'delete_power_failed');
              }
          }else{
              $this->add_op_log($op_description, 0);

@@ -32,6 +32,8 @@ class Op_log extends CI_Model {
         }
 
         $this->db->limit($limit, $offset);
+        $this->db->order_by('op_time', 'desc');
+
         $query = $this->db->get();
 
         return $query->result_array();

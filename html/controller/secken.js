@@ -1,6 +1,9 @@
+//配置私有云接口地址，也就是指向yangcong_private/api目录的域名地址
+var api_url = 'http://pc.secken.com';
+
 //需要初始化的数据
 var seckenPrivate = {
-    api_url:'http://pc1.secken.com',
+    api_url:api_url,
     jumpToLogin:function(status){
         if(status == 10000){
             location.href="/login.html";
@@ -15,9 +18,7 @@ var seckenPrivate = {
             jsonp:'secken_jsonp_callback',
             success:function(response){
 
-                if(response.status == 1){
-                    location.href='/login.html';
-                }else{
+                if(response.status == 0){
                     location.href='/pages/install/index.html';
                 }
             }
@@ -84,8 +85,12 @@ var seckenPrivate = {
                     }else{
                         $('#group').html('<red>加载失败</red>');
                     }
+
+                    if(response.data.allow_next == 1){
+                        $('#next').html('<button type="button" class="btn btn-info pull-right" onclick="javascript:location.href=\'/pages/install/db.html\'">下一步</button>');
+                    }
                 }
-            });
+            })
         },
         dbConfig:function(){
             var host = $('#host').val();
@@ -212,7 +217,10 @@ var seckenPrivate = {
 
                     if(response.status == 1){
                         $.each(response.data,function(i, n){
-                            var active = n.inner == 1 ? 'class="active"' : '';
+                            seckenPrivate.user.getGid();
+
+                            var active = n.gid == seckenPrivate.user.gid ? 'class="active"' : '';
+
                             var li = '<li '+active+'>';
                                 li += '<a class="inline-link" href="/index.html?g='+n.gid+'">';
                                 li += n.gname;
@@ -225,7 +233,7 @@ var seckenPrivate = {
                             $('#group').append(li);
                         });
                     }else{
-                        $('#group').html('<red>加载失败</red>');
+                        $('#group').html('加载失败');
                     }
                 }
             });
@@ -431,6 +439,7 @@ var seckenPrivate = {
                                     $.cookie('user_id', response.data.user_id);
                                     $.cookie('user_name', response.data.user_name);
                                     $.cookie('true_name', response.data.true_name);
+                                    $.cookie('company_logo', response.data.company_logo);
 
                                     location.href="/index.html";
                                 }else{
@@ -456,6 +465,7 @@ var seckenPrivate = {
                         $.cookie('user_id','',{expires: -1});
                         $.cookie('user_name','',{expires:-1});
                         $.cookie('true_name','',{expires: -1});
+                        $.cookie('company_logo','',{expires: -1});
 
                         location.href="/login.html";
                     }
@@ -471,19 +481,21 @@ var seckenPrivate = {
             }
         },
         bind:function(){
-            this.add(0);
-            $.ajax({
-                type:'POST',
-                dataType:'jsonp',
-                url:seckenPrivate.api_url + '/install/touchinstallfile',
-                data:{},
-                jsonp:'secken_jsonp_callback',
-                success:function(response){
-                    if(response.status == 1){
-                        location.href="/login.html";
+            var add_admin  = this.add(0);
+            if(add_admin != 0){
+                $.ajax({
+                    type:'POST',
+                    dataType:'jsonp',
+                    url:seckenPrivate.api_url + '/install/touchinstallfile',
+                    data:{},
+                    jsonp:'secken_jsonp_callback',
+                    success:function(response){
+                        if(response.status == 1){
+                            location.href="/login.html";
+                        }
                     }
-                }
-            });
+                });
+            }
         },
         getList:function(page){
 
@@ -542,6 +554,7 @@ var seckenPrivate = {
 
         },
         add:function(jump){
+            var gid = seckenPrivate.user.gid;
             var user_name = $('input[name=user_name]').val();
             var phone = $('input[name=phone]').val();
             var true_name = $('input[name=true_name]').val();
@@ -555,24 +568,24 @@ var seckenPrivate = {
             if(user_name.length == 0){
                 $('#tip').addClass('callout callout-danger').text('用户名不能为空').show();
                 $('input[name=user_name]').focus();
-                return;
+                return 0;
             }
             if(phone.length == 0){
                 $('#tip').addClass('callout callout-danger').text('手机号不能为空').show();
                 $('input[name=phone]').focus();
-                return;
+                return 0;
             }
             if(true_name.length == 0){
                 $('#tip').addClass('callout callout-danger').text('姓名不能为空').show();
                 $('input[name=true_name]').focus();
-                return;
+                return 0;
             }
 
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
                 url:seckenPrivate.api_url + '/web/user/add',
-                data:{user_name:user_name,phone:phone,true_name:true_name,is_admin:is_admin},
+                data:{gid:gid,user_name:user_name,phone:phone,true_name:true_name,is_admin:is_admin},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
                     $('button[name=adduser]').attr('disabled','disabled');
@@ -724,7 +737,10 @@ var seckenPrivate = {
                             table += '<thead>';
                             table += '<tr>';
                             table += '<td width="10%">行号</td>';
-                            table += '<td width="90%">错误</td>';
+                            table += '<td width="15%">用户名</td>';
+                            table += '<td width="15%">姓名</td>';
+                            table += '<td width="15%">手机号</td>';
+                            table += '<td width="45%">错误</td>';
                             table += '</tr>';
                             table += '</thead>';
                             table += '<tbody>';
@@ -732,7 +748,10 @@ var seckenPrivate = {
                             $.each(error, function(i, n){
                                 table += '<tr>';
                                 table += '<td width="10%">' + n.row + '</td>';
-                                table += '<td width="90%">' + n.error + '</td>';
+                                table += '<td width="15%">' + n.user_name + '</td>';
+                                table += '<td width="15%">' + n.true_name + '</td>';
+                                table += '<td width="15%">' + n.phone + '</td>';
+                                table += '<td width="45%">' + n.error + '</td>';
                                 table += '</tr>';
                             });
                             table += '</tbody>';
@@ -1054,9 +1073,6 @@ var seckenPrivate = {
                     }
                 }
             });
-        },
-        open:function(){
-
         }
     },
     //统计
@@ -1154,13 +1170,15 @@ var seckenPrivate = {
                             if(i == 0){
                                 seckenPrivate.authStats.defaultTab = n.id;
                             }
-                            var tr = '<br>';
+                            var tr = '<tr>';
+                                tr += '<td>' + n.statistics_time + '</td>';
                                 tr += '<td>' + n.click_sum + '</td>';
                                 tr += '<td>' + n.hand_sum + '</td>';
                                 tr += '<td>' + n.face_sum + '</td>';
                                 tr += '<td>' + n.noice_sum + '</td>';
+                                tr += '</tr>';
 
-                            $('#auth_detai').append(btn);
+                            $('#auth_detai').append(tr);
                         });
                         seckenPrivate.pagination(response.count, page, 'seckenPrivate.authStats.detail');
                     }else{
@@ -1188,7 +1206,7 @@ var seckenPrivate = {
                                 seckenPrivate.authStats.defaultTab = n.id;
                                 seckenPrivate.authStats.detail(1);
                             }
-                            var btn = '<button type="button" class="btn bg-olive margin" onclick="seckenPrivate.authStats.detail(1);seckenPrivate.authStats.defaultTab = '+n.id+'">';
+                            var btn = '<button type="button" class="btn bg-olive margin" onclick="seckenPrivate.authStats.defaultTab = '+n.id+';seckenPrivate.authStats.detail(1);">';
                                 btn += n.name;
                                 btn += '</button>';
                             $('#power_tab').append(btn);
@@ -1502,16 +1520,16 @@ var seckenPrivate = {
                                 li = '<li class="list-group-item">';
                                 li += '<h3>公有云</h3>';
                                 li += '<span style="padding-left:3px;">使用洋葱APP进行扫描登录</span>';
-                                li += '<div><button type="button" class="btn bg-olive margin">下载洋葱APP</button></div>';
+                                li += '<div><button type="button" class="btn bg-olive margin" onclick="window.open(\'https://www.yangcong.com/download\')">下载洋葱APP</button></div>';
                                 li += '</li>';
                             }else{
                                 li = '<li class="list-group-item">';
                                 li += '<h2>私有云</h2>';
                                 li += '<span>使用集成洋葱SDK客户端进行扫描</span>';
                                 li += '<div>';
-                                li += '<button type="button" class="btn bg-olive margin">IOS SDK 下载</button>';
-                                li += '<button type="button" class="btn bg-olive margin">Android SDK 下载</button>';
-                                li += '<button type="button" class="btn bg-olive margin">Demo</button>';
+                                li += '<button type="button" class="btn bg-olive margin" onclick="window.open(\'https://www.yangcong.com/download\')">IOS SDK 下载</button>';
+                                li += '<button type="button" class="btn bg-olive margin" onclick="window.open(\'https://www.yangcong.com/download\')">Android SDK 下载</button>';
+                                li += '<button type="button" class="btn bg-olive margin" onclick="window.open(\'https://www.yangcong.com/download\')">Demo</button>';
                                 li += '</div>';
                                 li += '</li>';
                             }

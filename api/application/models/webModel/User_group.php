@@ -43,6 +43,19 @@ class User_group extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    public function update_group($updateData, $where){
+        if(empty($updateData) && empty($where)){
+            return 0;
+        }
+
+        $this->db->set($updateData);
+        $this->db->where($where);
+
+        $this->db->update($this->_main_table);
+        //echo $this->db->last_query();
+        return $this->db->affected_rows();
+    }
+
     public function delete($user_ids){
         if(empty($user_ids)){
             return 0;
@@ -50,7 +63,7 @@ class User_group extends CI_Model {
 
         $this->db->where_in('user_id',$user_ids);
         $this->db->delete($this->_main_table);
-
+        //echo $this->db->last_query();
         return $this->db->affected_rows();
     }
 }
