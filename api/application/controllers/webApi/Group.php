@@ -74,6 +74,11 @@ class Group extends API_Controller{
      public function add(){
          $group_name = $this->input->get_post('group_name', TRUE);
 
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
+
          $insertData = array();
          $insertData = array(
              'name' => $group_name,
@@ -101,6 +106,11 @@ class Group extends API_Controller{
 
           $group_name = $this->input->get_post('group_name', TRUE);
           $gid = $this->input->get_post('gid', TRUE);
+
+          if ($this->form_validation->run() == FALSE){
+              $error = validation_errors();
+              $this->to_api_message(0, $error);
+          }
 
           //查询未修改前的分组名称
           $group_info = $this->group->get($gid);
@@ -135,6 +145,11 @@ class Group extends API_Controller{
        */
        public function delete(){
            $gid = $this->input->get_post('gid', TRUE);
+
+           if ($this->form_validation->run() == FALSE){
+               $error = validation_errors();
+               $this->to_api_message(0, $error);
+           }
 
            $get = $this->group->get($gid);
 
@@ -241,6 +256,11 @@ class Group extends API_Controller{
            $power_id = $this->input->get_post('power_id', TRUE);
            $set = $this->input->get_post('set', TRUE);
 
+           if ($this->form_validation->run() == FALSE){
+               $error = validation_errors();
+               $this->to_api_message(0, $error);
+           }
+           
            $group_info = $this->group->get($gid);
            if(empty($group_info)){
                $this->to_api_message(0, 'unknow_group');

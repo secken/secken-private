@@ -270,7 +270,7 @@ var seckenPrivate = {
                         $('#g_tip').addClass('callout callout-success').text('添加成功').show();
                         history.go(0);
                     }else{
-                        $('#g_tip').addClass('callout callout-danger').text('添加失败').show();
+                        $('#g_tip').addClass('callout callout-danger').text(response.description).show();
                     }
                 }
             });
@@ -293,7 +293,7 @@ var seckenPrivate = {
                         $('#eg_tip').addClass('callout callout-success').text('修改成功').show();
                         history.go(0);
                     }else{
-                        $('#eg_tip').addClass('callout callout-danger').text('修改失败').show();
+                        $('#eg_tip').addClass('callout callout-danger').text(response.description).show();
                     }
                 }
             });
@@ -314,7 +314,7 @@ var seckenPrivate = {
                         $('#g_tip').addClass('callout callout-success').text('删除成功').show();
                         location.href="/index.html";
                     }else{
-                        $('#g_tip').addClass('callout callout-danger').text('删除失败').show();
+                        $('#g_tip').addClass('callout callout-danger').text(response.description).show();
                     }
                 }
             });
@@ -355,9 +355,6 @@ var seckenPrivate = {
                         }
                     }
             });
-        },
-        search:function(){
-
         },
         power:function(){
 
@@ -1345,7 +1342,7 @@ var seckenPrivate = {
                         if(response.status == 1){
                             history.go(0);
                         }else{
-                            $('#tip').addClass('callout callout-danger').text('更新失败').show();
+                            $('#tip').addClass('callout callout-danger').text(response.description).show();
                         }
                     }
                 });

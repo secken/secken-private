@@ -12,9 +12,6 @@ class User extends API_Controller{
         $this->load->library('session');
     }
 
-    /*
-     *
-     */
     public function destory_session(){
         $this->session->sess_destroy();
 
@@ -135,6 +132,11 @@ class User extends API_Controller{
         $intro = $intro === NULL ? '没有添加简介' : $intro;
         $is_admin = $this->input->get_post('is_admin', TRUE);
 
+        if ($this->form_validation->run() == FALSE){
+            $error = validation_errors();
+            $this->to_api_message(0, $error);
+        }
+
         $gid = $gid ? $gid : 1;
 
         if($is_admin == 1){
@@ -243,6 +245,11 @@ class User extends API_Controller{
          $open = $this->input->get_post('open', TRUE);
          $uid = $this->input->get_post('uid', TRUE);
 
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
+
          $user_info = $this->user->get_user_by_id(array($uid));
          if(empty($user_info)){
              $this->to_api_message(0, 'unknow_user');
@@ -276,6 +283,11 @@ class User extends API_Controller{
      */
      public function delete(){
          $uids = $this->input->get_post('uids', TRUE);
+
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
 
          $user_ids = array();
 
@@ -341,6 +353,11 @@ class User extends API_Controller{
 
           $uids = $this->input->get_post('uids', TRUE);
           $gid = $this->input->get_post('gid', TRUE);
+
+          if ($this->form_validation->run() == FALSE){
+              $error = validation_errors();
+              $this->to_api_message(0, $error);
+          }
 
           $user_ids = array();
           if(strpos($uids,'-') != FALSE){

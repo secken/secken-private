@@ -47,6 +47,11 @@ class Setting extends API_Controller{
         $app_id = $this->input->get_post('app_id', TRUE);
         $app_key = $this->input->get_post('app_key', TRUE);
 
+        if ($this->form_validation->run() == FALSE){
+            $error = validation_errors();
+            $this->to_api_message(0, $error);
+        }
+
         $service_type = $this->check_app_info($app_id, $app_key);
 
         if($service_type == 0){
@@ -157,7 +162,11 @@ class Setting extends API_Controller{
     public function get_event_result(){
 
         $event_id = $this->input->get_post('event_id', TRUE);
-
+        if ($this->form_validation->run() == FALSE){
+            $error = validation_errors();
+            $this->to_api_message(0, $error);
+        }
+        
         $this->load->model('webModel/Setting_model','setting');
         $setting = $this->setting->get();
         if(empty($setting)|| empty($setting['app_id']) || empty($setting['app_key'])){

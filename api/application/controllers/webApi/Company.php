@@ -42,6 +42,11 @@ class Company extends API_Controller{
         $company_name = $this->input->get_post('company_name', TRUE);
         $company_intro = $this->input->get_post('company_intro', TRUE);
 
+        if ($this->form_validation->run() == FALSE){
+            $error = validation_errors();
+            $this->to_api_message(0, $error);
+        }
+
         $data = array();
 
         if($company_name){

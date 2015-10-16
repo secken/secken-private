@@ -57,6 +57,11 @@ class Power extends API_Controller{
          $power_name = $this->input->get_post('power_name', TRUE);
          $power_intro = $this->input->get_post('power_intro', TRUE);
 
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
+
          $insertData = array();
          $insertData = array(
              'name' => $power_name,
@@ -87,6 +92,11 @@ class Power extends API_Controller{
      */
      public function power_switch(){
          $power_id = $this->input->get_post('power_id');
+
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
 
          $power = $this->power->get($power_id);
          if(empty($power)){
@@ -126,7 +136,11 @@ class Power extends API_Controller{
      * @return json
      */
      public function delete(){
-         $power_id = $this->input->get_post('power_id');
+         $power_id = $this->input->get_post('power_id', TRUE);
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
 
          $power = $this->power->get($power_id);
          if(empty($power)){
@@ -222,6 +236,11 @@ class Power extends API_Controller{
          $power_status = $this->input->get_post('power_status', TRUE);
          $power_id = $this->input->get_post('power_id', TRUE);
 
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
+
          $power = $this->power->get($power_id);
          if(empty($power)){
              $this->to_api_message(0, 'unknow_power');
@@ -258,6 +277,11 @@ class Power extends API_Controller{
      */
      public function regen_auth_key(){
          $power_id = $this->input->get_post('id', TRUE);
+
+         if ($this->form_validation->run() == FALSE){
+             $error = validation_errors();
+             $this->to_api_message(0, $error);
+         }
 
          $power = $this->power->get($power_id);
          if(empty($power)){

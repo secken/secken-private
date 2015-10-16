@@ -8,8 +8,7 @@ class API_Controller extends CI_Controller
     {
         parent::__construct();
 
-        //加载语言文件
-        $this->lang->load('api');
+        $_POST = !empty($_GET) ? array_merge($_POST,$_GET) : $_POST;
 
         $this->jsonp_callback = $this->input->get('secken_jsonp_callback');
 

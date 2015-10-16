@@ -14,7 +14,7 @@ class Upgrade extends API_Controller{
     public function check(){
         $dependent_code = $this->input->get_post('dependent_code', TRUE);
         $version_code = $this->input->get_post('version_code', TRUE);
-
+        
         $this->load->model('webModel/Setting_model','setting');
         $setting = $this->setting->get();
         if(empty($setting)|| empty($setting['app_id']) || empty($setting['app_key'])){

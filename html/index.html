@@ -224,6 +224,12 @@
     <script src="controller/secken.js"></script>
     <script>
         seckenPrivate.user.import();
+        $(function(){
+            $('#setPower').on('hide.bs.modal', function () {
+                history.go(0);
+            });
+        });
+
     </script>
 
 <!-- 设置权限弹框 -->
