@@ -494,7 +494,7 @@ class User extends API_Controller{
                 $config = array();
                 $config = array(
                     'upload_path'   => realpath(dirname(SELF)).'/resources/',
-                    'allowed_types' => 'xls',
+                    'allowed_types' => array('xls','xlsx'),
                     'max_size'      => '2048',
                     'file_name'     => 'user_'.time()
                 );
@@ -544,6 +544,21 @@ class User extends API_Controller{
                         $true_name = $sheet->getCell('B'.$row)->getValue();
                         $phone = $sheet->getCell('C'.$row)->getValue();
 
+                        if(is_null($user_name) && is_null($true_name) && is_null($phone)){
+                            continue;
+                        }
+
+                        if(is_null($user_name)){
+                            $error_row++;
+                            $error[] = array(
+                                'row' => $row,
+                                'user_name' => $user_name,
+                                'true_name' => $true_name,
+                                'phone' => $phone,
+                                'error' => $this->lang->line('username_not_allow_empty')
+                            );
+                            continue;
+                        }
                         //检查用户名
                         $check = $this->user->check_user_name($user_name);
                         if($check){
@@ -554,6 +569,18 @@ class User extends API_Controller{
                                 'true_name' => $true_name,
                                 'phone' => $phone,
                                 'error' => $this->lang->line('username_is_exists')
+                            );
+                            continue;
+                        }
+
+                        if(is_null($true_name)){
+                            $error_row++;
+                            $error[] = array(
+                                'row' => $row,
+                                'user_name' => $user_name,
+                                'true_name' => $true_name,
+                                'phone' => $phone,
+                                'error' => $this->lang->line('truename_not_allow_empty')
                             );
                             continue;
                         }
@@ -602,7 +629,7 @@ class User extends API_Controller{
                                         'phone' => $phone,
                                         'error' => $this->lang->line('please_login_on_yangcong')
                                     );
-                                    break;
+                                    continue;
                                 }
                             }else{
                                 $error_row++;

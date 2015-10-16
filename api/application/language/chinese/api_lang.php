@@ -61,6 +61,8 @@ $lang['service_is_not_active'] = '服务尚未激活';
 $lang['set_service_success'] = '配置服务成功';
 $lang['set_service_failed'] = '配置服务失败';
 
+$lang['username_not_allow_empty'] = '用户名不能为空';
+$lang['truename_not_allow_empty'] = '姓名不能为空';
 $lang['username_is_exists'] = '用户名已经存在';
 $lang['admin_is_exists'] = '管理员已经存在,目前只允许存在一个管理员';
 $lang['phone_is_exists'] = '手机号已经存在';

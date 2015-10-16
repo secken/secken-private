@@ -515,14 +515,19 @@ var seckenPrivate = {
                             seckenPrivate.jumpToLogin(response.status);
                             $.each(response.data,function(i, n){
                                 var tr = '<tr>';
-                                    tr += '<td><label><input type="checkbox" name="u" value="'+n.user_id+'"/></label></td>';
-                                    tr += '<td>'+n.user_name+'</td>';
-                                    tr += '<td>'+n.true_name+'</td>';
-                                    tr += '<td>'+n.phone+'</td>';
-                                    tr += '<td>'+n.status+'</td>';
-                                    tr += '<td>'+n.update_time+'</td>';
-                                    tr += '<td><a href="#" data-userid = "'+n.user_id+'" data-truename = "'+n.true_name+'" data-open="'+n.status+'" data-createtime= "'+n.create_time+'" data-updatetime="'+n.update_time+'"data-toggle="modal" onclick="javascript:seckenPrivate.user.transmit(this);">修改</a></td>';
-                                    tr += '</tr>';
+                                var disable = '';
+                                if(n.user_id == $.cookie('user_id')){
+                                    var disable = 'disabled=disabled';
+                                }
+                                tr += '<td><label><input type="checkbox" name="u" value="'+n.user_id+'" '+disable+'/></label></td>';
+                                tr += '<td>'+n.user_name+'</td>';
+                                tr += '<td>'+n.true_name+'</td>';
+                                tr += '<td>'+n.phone+'</td>';
+                                tr += '<td>'+n.status+'</td>';
+                                tr += '<td>'+n.update_time+'</td>';
+                                tr += '<td><a href="#" data-userid = "'+n.user_id+'" data-truename = "'+n.true_name+'" data-open="'+n.status+'" data-createtime= "'+n.create_time+'" data-updatetime="'+n.update_time+'"data-toggle="modal" onclick="javascript:seckenPrivate.user.transmit(this);">修改</a></td>';
+                                tr += '</tr>';
+
                                 $('#user > tbody').append(tr);
                             });
 
@@ -718,7 +723,7 @@ var seckenPrivate = {
                 'swf'      : '../../plugins/uploadify/uploadify.swf',
                 'uploader' : seckenPrivate.api_url +'/web/user/import',
                 'buttonText': '批量导入',
-                'fileTypeExts': '*.xls',
+                'fileTypeExts': '*.xls;*.xlsx',
                 'sizeLimit': 2048,
                 'simUploadLimit':1,
                 'fileObjName':'userfile',
@@ -730,11 +735,11 @@ var seckenPrivate = {
 
                     if(error_row > 0){
 
-                        var table = '<table width="100%;border=1">';
+                        var table = '<table class="table table-bordered table-striped">';
                             table += '<thead>';
                             table += '<tr>';
-                            table += '<td width="10%">行号</td>';
-                            table += '<td width="15%">用户名</td>';
+                            table += '<td width="11%">行号</td>';
+                            table += '<td width="14%">用户名</td>';
                             table += '<td width="15%">姓名</td>';
                             table += '<td width="15%">手机号</td>';
                             table += '<td width="45%">错误</td>';
