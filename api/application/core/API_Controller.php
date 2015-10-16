@@ -21,7 +21,7 @@ class API_Controller extends CI_Controller
         // echo $method_name;
         $no_need_login_controller_method = array();
         $no_need_login_controller_method = array(
-            'index','auth','user','setting'
+            'index','auth','user','setting','cron'
         );
 
         if(!in_array($controller_name, $no_need_login_controller_method) && !$this->is_login()){
