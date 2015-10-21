@@ -2,10 +2,16 @@ Introduction
 ============
 
 目录结构:
-yangcong_private
+rootdir
   |
-  |--api   私有云接口目录，php接口所在目录
-  |--html  私有云前端目录，所有的html和js都在这里
+  |--api        私有云接口目录，php接口所在目录
+  |--bootstrap  bootstrap 相关js、css库文件
+  |--controller 路由控制js
+  |--dist       界面模块相关js、css、img
+  |--pages      html 界面模板
+  |--plugins    前端开发相关插件
+  |--index.html 首页
+  |--login.html 登录
 
 依赖环境:
 1.服务器:建议使用类Unix系统

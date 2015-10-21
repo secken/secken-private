@@ -172,7 +172,7 @@ var seckenPrivate = {
 
                         var qrcode = '<div style="width:300px;height:400;margin:0 auto;">';
                             qrcode += '<img src="'+response.data.qrcode+'" width="300" height="300" />';
-                            qrcode += '<center><b id="result_msg">'+response.description+'</b></center>';
+                            //qrcode += '<center><b id="result_msg">'+response.description+'</b></center>';
                             qrcode += '</div>';
 
                         $('.box-body').append(qrcode);
