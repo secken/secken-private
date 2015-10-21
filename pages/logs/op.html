@@ -11,7 +11,7 @@
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
@@ -72,7 +72,7 @@
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>用户</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
+              <ul class="treeview-menu" id="group">
                 <li><a href="/index.html"><i class="fa fa-circle-o"></i>默认组</a></li>
               </ul>
             </li>
@@ -191,6 +191,7 @@
     <!-- Controller -->
     <script src="../../controller/secken.js"></script>
     <script>
+        seckenPrivate.group.getList();
         seckenPrivate.log.opList(1);
 
         if($.cookie('company_logo').length > 0){
