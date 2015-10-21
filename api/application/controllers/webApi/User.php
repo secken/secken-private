@@ -505,11 +505,11 @@ class User extends API_Controller{
                 }else{
                     $upload_data = $this->upload->data();  //文件的一些信息
                     $excel_path = $upload_data['full_path'];
-
+                    @chmod($excel_path, 0644);
                     require_once APPPATH . '/libraries/PHPExcel.php';
                     require_once APPPATH . '/libraries/PHPExcel/IOFactory.php';
 
-                    $objReader = IOFactory::createReader('Excel2007');
+                    $objReader = IOFactory::createReader('Excel5');
                     $objPHPExcel = $objReader->load($excel_path);
                     $sheet = $objPHPExcel->getSheet(0); // 读取第一工作表
                     $highestRow = $sheet->getHighestRow(); // 取得总行数

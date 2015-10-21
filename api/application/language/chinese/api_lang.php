@@ -99,4 +99,4 @@ $lang['check_env'] = '检查环境';
 
 $lang['get_version_info_success'] = '获取版本信息';
 $lang['secken_config_error'] = '洋葱配置错误';
-$lang['please_login_on_yangcong'] = '请先在洋葱客户端注册,下载地址:http://www.yangcong.com/download';
+$lang['please_login_on_yangcong'] = '该手机号还未注册,请先在洋葱客户端注册,下载地址:http://www.yangcong.com/download';
