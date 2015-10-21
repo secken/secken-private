@@ -74,10 +74,10 @@ class Index extends API_Controller {
         //检查文件是否可写
         $check_write_file = array();
         $check_write_file = array(
-            'db' => APPPATH . 'config/database.php',
-            'cache' => APPPATH . 'cache',
-            'logs' => APPPATH . 'logs',
-            'resources' => dirname(APPPATH) . '/resources'
+            'api/application/config/database.php' => APPPATH . 'config/database.php',
+            'api/application/cache' => APPPATH . 'cache',
+            'api/application/logs' => APPPATH . 'logs',
+            'api/resources' => dirname(APPPATH) . '/resources'
         );
 
         foreach($check_write_file as $item => $file){
