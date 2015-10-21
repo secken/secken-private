@@ -2,6 +2,28 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
     $config = array(
+        'Index/add_database_config_file' => array(
+            array(
+                'field' => 'host_name',
+                'label' => 'lang:host_name',
+                'rules' => 'trim|valid_ip',
+            ),
+            array(
+                'field' => 'db_name',
+                'label' => 'lang:db_name',
+                'rules' => 'trim|alpha_dash',
+            ),
+            array(
+                'field' => 'db_user',
+                'label' => 'lang:db_user',
+                'rules' => 'trim|alpha',
+            ),
+            array(
+                'field' => 'db_pre',
+                'label' => 'lang:db_pre',
+                'rules' => 'trim|alpha',
+            ),
+        ),
         'Group/add' => array(
             array(
                 'field' => 'group_name',
@@ -104,12 +126,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             array(
                 'field' => 'app_id',
                 'label' => 'lang:app_id',
-                'rules' => 'trim|required|exact_length[32]'
+                'rules' => 'trim|required|alpha_numeric|exact_length[32]'
             ),
             array(
                 'field' => 'app_key',
                 'label' => 'lang:app_key',
-                'rules' => 'trim|required|exact_length[20]'
+                'rules' => 'trim|required|alpha_numeric|exact_length[20]'
             )
         ),
         'Setting/get_event_result' => array(

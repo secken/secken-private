@@ -104,9 +104,15 @@ class Index extends API_Controller {
         $db_pwd = $this->input->get_post('db_pwd', TRUE);
         $db_pre = $this->input->get_post('db_pre', TRUE);
 
-        $host_name = $host_name ? $host_name : 'localhost';
+        if ($this->form_validation->run() == FALSE){
+            $error = validation_errors();
+            $this->to_api_message(0, $error);
+        }
+
+        $host_name = $host_name ? $host_name : '127.0.0.1';
         $db_name = $db_name ? $db_name : 'yangcong_private_cloud';
         $db_user = $db_user ? $db_user : 'root';
+        $db_pre = $db_pre ? $db_pre . '_' : 'pc_';
 
         $content = <<<EOT
 <?php

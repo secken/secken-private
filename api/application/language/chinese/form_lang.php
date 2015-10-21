@@ -21,3 +21,8 @@ $lang['phone'] = '手机号';
 $lang['is_admin'] = '管理员标识';
 $lang['open'] = '开启标识';
 $lang['uid'] = '用户标识';
+
+$lang['host_name'] = '数据库服务器';
+$lang['db_name'] = '数据库名';
+$lang['db_user'] = '数据库用户名';
+$lang['db_pre'] = '数据库前缀';

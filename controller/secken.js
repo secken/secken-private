@@ -1,5 +1,3 @@
-//配置私有云接口地址，也就是指向yangcong_private/api目录的域名地址
-
 //需要初始化的数据
 var seckenPrivate = {
     api_url:'/api',
@@ -102,14 +100,14 @@ var seckenPrivate = {
                 type:'POST',
                 dataType:'jsonp',
                 url:seckenPrivate.api_url + '/install/addconfig',
-                data:{host_name:host,db_name:dbname,db_user:dbuser,db_pwd:dbpwd,dbpre:dbpre},
+                data:{host_name:host,db_name:dbname,db_user:dbuser,db_pwd:dbpwd,db_pre:dbpre},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
 
                     if(response.status == 1){
                         location.href='/pages/install/execsql.html';
                     }else{
-                        $('#tip').html('<red>设置失败</red>');
+                        $('#tip').addClass('callout callout-danger').text(response.description).show();
                     }
                 }
             });
@@ -154,7 +152,9 @@ var seckenPrivate = {
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
                     if(response.status == 1){
-                        location.href='/pages/activate/auth.html';
+                        location.href='/pages/activate/bindcreator.html';
+                    }else{
+                        $('#tip').addClass('callout callout-danger').text(response.description).show();
                     }
                 }
             });
@@ -476,23 +476,6 @@ var seckenPrivate = {
                 this.gid = unescape(r[2]);
             }
         },
-        bind:function(){
-            var add_admin  = this.add(0);
-            if(add_admin != 0){
-                $.ajax({
-                    type:'POST',
-                    dataType:'jsonp',
-                    url:seckenPrivate.api_url + '/install/touchinstallfile',
-                    data:{},
-                    jsonp:'secken_jsonp_callback',
-                    success:function(response){
-                        if(response.status == 1){
-                            location.href="/login.html";
-                        }
-                    }
-                });
-            }
-        },
         getList:function(page){
 
             var wd = $('input[name=wd]').val();
@@ -593,11 +576,26 @@ var seckenPrivate = {
                 },
                 success:function(response){
                     seckenPrivate.jumpToLogin(response.status);
+
                     if(response.status == 1){
 
                         $('#tip').addClass('callout callout-success').text('添加成功').show();
+                        $('#success_hidden').val(1);
                         if(jump){
                             history.go(0);
+                        }else{
+                            $.ajax({
+                                type:'POST',
+                                dataType:'jsonp',
+                                url:seckenPrivate.api_url + '/install/touchinstallfile',
+                                data:{},
+                                jsonp:'secken_jsonp_callback',
+                                success:function(response){
+                                    if(response.status == 1){
+                                        location.href="/login.html";
+                                    }
+                                }
+                            });
                         }
                     }else{
                         $('#tip').addClass('callout callout-danger').text(response.description).show();

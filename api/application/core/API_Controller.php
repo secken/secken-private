@@ -54,6 +54,7 @@ class API_Controller extends CI_Controller
 
         //获取操作者
         $op_username = $this->get_user_info('true_name');
+        $op_username = $op_username ? $op_username : '系统';
         //获取操作类型
         $controller = $this->uri->rsegment(1);
         $controller = strtolower($controller);
