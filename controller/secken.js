@@ -1414,6 +1414,7 @@ var seckenPrivate = {
                         seckenPrivate.jumpToLogin(response.status);
                         if(response.status == 1){
                             seckenPrivate.setting.upgrade.lastest_version = response.data;
+                            seckenPrivate.setting.upgrade.lastest_version.dependent_code = dependent_code;
 
                             $.each(response.data, function(i, n){
 
