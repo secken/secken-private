@@ -18,6 +18,8 @@ rootdir
 2.需要手动安装nginx、php、mysql下载当前的稳定版即可
 3.用到的php扩展:curl.so、zip.so、gd.so
 
+注意: 请将nginx、php、私有云项目 的用户和组所属保持一致，比如都为www:www
+
 在nginx上如何配置项目:
 
 server {
