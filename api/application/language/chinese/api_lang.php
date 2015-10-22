@@ -79,6 +79,7 @@ $lang['get_auth_statistics_success'] = '获取验证统计列表成功';
 $lang['get_device_distribution_success'] = '获取设备分布列表成功';
 
 $lang['company_set'] = '设置企业信息';
+$lang['company_upload'] = '设置企业信息';
 $lang['group_add'] = '添加分组';
 $lang['group_edit'] = '编辑分组';
 $lang['group_delete'] = '删除分组';
