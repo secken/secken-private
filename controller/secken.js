@@ -1464,7 +1464,7 @@ var seckenPrivate = {
                     type:'post',
                     dataType:'jsonp',
                     url:seckenPrivate.api_url + '/web/upgrade/update',
-                    data:{upgrade:seckenPrivate.setting.upgrade},
+                    data:{upgrade:seckenPrivate.setting.upgrade.lastest_version},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
                         $('#download').modal('hide');
