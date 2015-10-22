@@ -1496,7 +1496,7 @@ var seckenPrivate = {
 
                                 $('#update_tip').html(table);
 
-                                $('#complate'). html('<button type="submit" class="btn btn-info pull-right" id="upgrade_btn" onclick="$(\"#update\").modal("hide");">关闭</button>');
+                                $('#complate'). html('<button type="submit" class="btn btn-info pull-right" id="upgrade_btn" onclick="$(\'#update\').modal(\'hide\');history.go(0);">完成</button>');
                         }else{
                             $('#update_tip').html('<center>更新失败，请稍后再试！</center>');
                         }
