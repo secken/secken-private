@@ -14,7 +14,7 @@ class Upgrade extends API_Controller{
     public function check(){
         $dependent_code = $this->input->get_post('dependent_code', TRUE);
         $version_code = $this->input->get_post('version_code', TRUE);
-        
+
         $this->load->model('webModel/Setting_model','setting');
         $setting = $this->setting->get();
         if(empty($setting)|| empty($setting['app_id']) || empty($setting['app_key'])){
@@ -68,9 +68,11 @@ class Upgrade extends API_Controller{
         $download_file = APPPATH . 'cache/'.$zip_name;
 
         $fp_output = fopen($download_file, 'w');
-        $ch = curl_init($download_url);
+
+        $ch = curl_init($decode_download);
         curl_setopt($ch, CURLOPT_FILE, $fp_output);
-        curl_exec($ch);
+        $exec = curl_exec($ch);
+        
         curl_close($ch);
 
         if(file_exists($download_file)){
@@ -89,7 +91,7 @@ class Upgrade extends API_Controller{
         $decode_download = urldecode($upgrade['download']);
         $zip_name = basename($decode_download);
 
-         $zip_file = APPPATH . 'cache' . DIRECTORY_SEPARATOR . $zip_name;
+        $zip_file = APPPATH . 'cache' . DIRECTORY_SEPARATOR . $zip_name;
         if(!file_exists($zip_file)){
             $this->to_api_message(0, 'zip_not_exist');
         }
