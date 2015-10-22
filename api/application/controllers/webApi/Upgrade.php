@@ -171,10 +171,37 @@ class Upgrade extends API_Controller{
                     );
                 }
             }
+
+            $this->deldir($ori_dir);
         }
     }
 
+    private function deldir($dir) {
+        //先删除目录下的文件：
+        $dir = rtrim($dir, '/') . '/';
+        $dh=opendir($dir);
+        while ($file=readdir($dh)){
+            if($file!="." && $file!="..") {
+                $fullpath=$dir . $file;
+
+                if(is_file($fullpath)){
+                    unlink($fullpath);
+                }else{
+                    if(!@rmdir($fullpath)){
+                        $this->deldir($fullpath);
+                    }
+                }
+            }
+        }
+
+        closedir($dh);
+
+        //删除当前文件夹：
+        rmdir($dir);
+    }
+
     private function read_dir(&$fileInfo, $dir){
+
 
         foreach (glob($dir.'*', GLOB_MARK) as $v) {
 
