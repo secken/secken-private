@@ -24,10 +24,10 @@ rootdir
 
 server {
     listen       80;
-    server_name  pchtml.secken.com;
+    server_name  admin.domain.com;
 
     access_log  logs/wp-secken.access.log  main;
-    root html/yangcong_private;
+    root /var/hosts/com/domain/admin;
 
     location / {
         index  index.html index.htm;
@@ -50,13 +50,13 @@ server {
 }
 
 如何安装:
-例： html.yc.com 指向了yangcong_private目录
+例： admin.domain.com 指向了/var/hosts/com/domain/admin 目录
 
-打开html.yc.com 会自动跳转到安装页面、按顺序安装即可。
+打开admin.domain.com 会自动跳转到安装页面、按顺序安装即可。
 
 需要执行的脚本：
 
-例:项目放在了:/usr/local/nginx/html/yangcong_private, php的执行目录为:/usr/local/php/bin/php
+例:项目放在了:/var/hosts/com/domain/admin, php的执行目录为:/usr/local/php/bin/php
 
 脚本需要每天0点来执行一次，用来统计验证信息
-/usr/local/php/bin/php /usr/local/nginx/html/yangcong_private/api/index.php webApi Cron auth_statistics
+/usr/local/php/bin/php /var/hosts/com/domain/admin/api/index.php webApi Cron auth_statistics
