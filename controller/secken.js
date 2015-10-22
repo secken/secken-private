@@ -1464,7 +1464,7 @@ var seckenPrivate = {
                     type:'post',
                     dataType:'jsonp',
                     url:seckenPrivate.api_url + '/web/upgrade/update',
-                    data:{upgrade:seckenPrivate.setting.upgrade.lastest_version},
+                    data:{upgrade:seckenPrivate.setting.upgrade},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
                         $('#download').modal('hide');
@@ -1495,7 +1495,7 @@ var seckenPrivate = {
 
                                 $('#update_tip').html(table);
 
-                                $('#complate'). html('<button type="submit" class="btn btn-info pull-right" id="upgrade_btn" onclick="$(\"update\").modal("hide");"></button>');
+                                $('#complate'). html('<button type="submit" class="btn btn-info pull-right" id="upgrade_btn" onclick="$(\"#update\").modal("hide");">关闭</button>');
                         }else{
                             $('#update_tip').html('<center>更新失败，请稍后再试！</center>');
                         }

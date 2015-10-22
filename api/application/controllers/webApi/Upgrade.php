@@ -72,7 +72,7 @@ class Upgrade extends API_Controller{
         $ch = curl_init($decode_download);
         curl_setopt($ch, CURLOPT_FILE, $fp_output);
         $exec = curl_exec($ch);
-        
+
         curl_close($ch);
 
         if(file_exists($download_file)){
@@ -130,7 +130,7 @@ class Upgrade extends API_Controller{
                 'upgrade_time' => date('Y-m-d H:i:s')
             );
             $where = array(
-                'version_code' => $upgrade['old']
+                'dependent_code' => $upgrade['dependent_code']
             );
             $affected_rows = $this->version->update($updateData, $where);
             if($affected_rows){
