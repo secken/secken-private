@@ -16,6 +16,7 @@ class Group_power extends CI_Model {
         $this->db->from($this->_main_table . ' AS gp');
         $this->db->join($this->_power_table . ' AS p','gp.power_id = p.id','left');
         $this->db->where_in('gp.gid', $gid);
+        $this->db->where('p.status', 1);
 
         $query = $this->db->get();
         return $query->result_array();
