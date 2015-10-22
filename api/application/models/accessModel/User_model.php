@@ -15,6 +15,7 @@ class User_model extends CI_Model {
         $this->db->from($this->_main_table . ' AS u');
         $this->db->join($this->_user_group_table . ' AS g', 'g.user_id = u.user_id', 'LEFT');
         $this->db->where('u.user_name', $username);
+        $this->db->where('u.is_open', 1);
 
         $query = $this->db->get();
 
