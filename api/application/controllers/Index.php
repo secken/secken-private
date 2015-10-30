@@ -6,7 +6,9 @@ class Index extends API_Controller {
     public function __construct(){
         parent::__construct();
 
-        $this->load->dbforge();
+        if(!in_array($this->uri->segment(2), array('check', 'addconfig', 'checkinstall'))){
+            $this->load->dbforge();
+        }
     }
 
     //检查环境
@@ -163,7 +165,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 EOT;
     	$content .= "//\r\n\r\n?>";
     	file_put_contents(APPPATH . 'config/database.php', $content);
+        $config = array(
+            'dsn'   => '',
+            'hostname' => "$host_name",
+            'username' => "$db_user",
+            'password' => "$db_pwd",
+            'database' => '',
+            'dbdriver' => "$dbdriver",
+            'dbprefix' => "$db_pre",
+            'pconnect' => FALSE,
+            'db_debug' => TRUE,
+            'cache_on' => FALSE,
+            'cachedir' => '',
+            'char_set' => 'utf8',
+            'dbcollat' => 'utf8_general_ci',
+            'swap_pre' => '',
+            'encrypt' => FALSE,
+            'compress' => FALSE,
+            'stricton' => FALSE,
+            'failover' => array(),
+            'save_queries' => TRUE
+        );
 
+        $this->load->database($config);
+        $this->load->dbforge();
         $create = $this->dbforge->create_database($db_name);
         if($create){
             $this->to_api_message(1, 'create_database_success');
@@ -446,28 +471,32 @@ EOT;
                 'dependent_code' => 1,
                 'version_name' => '版本1.0',
                 'version_code' => 1,
-                'upgrade_time' => date('Y-m-d H:i:s')
+                'upgrade_time' => date('Y-m-d H:i:s'),
+                'upgrade_content' => ''
             ),
             array(
                 'dependent_info' => '私有云服务组件',
                 'dependent_code' => 2,
                 'version_name' => '版本1.0',
                 'version_code' => 1,
-                'upgrade_time' => date('Y-m-d H:i:s')
+                'upgrade_time' => date('Y-m-d H:i:s'),
+                'upgrade_content' => ''
             ),
             array(
                 'dependent_info' => '私有云Android SDK',
                 'dependent_code' => 3,
                 'version_name' => '版本1.0',
                 'version_code' => 1,
-                'upgrade_time' => date('Y-m-d H:i:s')
+                'upgrade_time' => date('Y-m-d H:i:s'),
+                'upgrade_content' => ''
             ),
             array(
                 'dependent_info' => '私有云IOS SDK',
                 'dependent_code' => 4,
                 'version_name' => '版本1.0',
                 'version_code' => 1,
-                'upgrade_time' => date('Y-m-d H:i:s')
+                'upgrade_time' => date('Y-m-d H:i:s'),
+                'upgrade_content' => ''
             )
         );
         $this->load->model('webModel/Version_model','version');
