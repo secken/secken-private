@@ -54,7 +54,7 @@ server {
     }
 }
 
-（2）配置方法2:
+（2）配置方法2:(默认使用此配置)
 
 如果您没有权限修改nginx配置文件，那下面这些可能适合您。
 1. 打开controller目录将secken.qs.js替换secken.js

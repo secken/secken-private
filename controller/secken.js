@@ -13,7 +13,7 @@ var seckenPrivate = {
         $.ajax({
             type:'POST',
             dataType:'jsonp',
-            url:seckenPrivate.base_dir + '/api/install/checkinstall',
+            url:seckenPrivate.base_dir + '/api/index.php?c=Index&m=check_install',
             data:{},
             jsonp:'secken_jsonp_callback',
             success:function(response){
@@ -50,7 +50,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/install/check',
+                url:seckenPrivate.base_dir + '/api/index.php?c=Index&m=check',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -108,7 +108,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/install/addconfig',
+                url:seckenPrivate.base_dir + '/api/index.php?c=Index&m=add_database_config_file',
                 data:{host_name:host,db_name:dbname,db_user:dbuser,db_pwd:dbpwd,db_pre:dbpre},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -128,7 +128,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/install/addtable',
+                url:seckenPrivate.base_dir + '/api/index.php?c=Index&m=add_table',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -162,7 +162,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/setting/set',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Setting&m=set_service',
                 data:{app_id:app_id,app_key:app_key},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -181,7 +181,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/setting/getauthqrcode',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Setting&m=get_auth_qrcode',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -205,7 +205,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/setting/getresult',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Setting&m=get_event_result',
                 data:{event_id:event_id},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -227,7 +227,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=index',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -285,7 +285,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group/add',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=add',
                 data:{group_name:group_name},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -311,7 +311,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group/edit',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=edit',
                 data:{group_name:group_name, gid:gid},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -337,7 +337,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group/delete',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=delete',
                 data:{gid:gid},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -360,7 +360,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group/setpower',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=set_power',
                 data:{gid:seckenPrivate.user.gid, power_id:power_id, set:s},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -399,7 +399,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group/getpower',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=get_power',
                 data:{gid:seckenPrivate.user.gid},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -422,7 +422,7 @@ var seckenPrivate = {
                         $.ajax({
                             type:'POST',
                             dataType:'jsonp',
-                            url:seckenPrivate.base_dir + '/api/web/power',
+                            url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=index',
                             data:{},
                             jsonp:'secken_jsonp_callback',
                             success:function(response){
@@ -461,7 +461,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/setting/getresult',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Setting&m=get_event_result',
                 data:{event_id:event_id},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -469,7 +469,7 @@ var seckenPrivate = {
                         $.ajax({
                             type:'POST',
                             dataType:'jsonp',
-                            url:seckenPrivate.base_dir + '/api/web/user/savesess',
+                            url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=save_session',
                             data:{service_type:response.data.service_type, identity_name:response.data.identity_name},
                             jsonp:'secken_jsonp_callback',
                             success:function(response){
@@ -498,7 +498,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/user/destroysess',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=destory_session',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 success:function(response){
@@ -532,7 +532,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/user',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=index',
                     data:{gid:this.gid,page:page},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
@@ -619,7 +619,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/user/add',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=add',
                 data:{gid:gid,user_name:user_name,phone:phone,true_name:true_name,is_admin:is_admin},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -638,7 +638,7 @@ var seckenPrivate = {
                             $.ajax({
                                 type:'POST',
                                 dataType:'jsonp',
-                                url:seckenPrivate.base_dir + '/api/install/touchinstallfile',
+                                url:seckenPrivate.base_dir + '/api/index.php?c=Index&m=write_install_file',
                                 data:{},
                                 jsonp:'secken_jsonp_callback',
                                 success:function(response){
@@ -672,7 +672,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/user/edit',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=edit',
                 data:{uid:user_id,true_name:true_name,open:open},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -707,7 +707,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/user/delete',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=delete',
                 data:{uids:uids},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -752,7 +752,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/user/move',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=move_to_anthor_group',
                 data:{gid:gid,uids:uids},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -781,7 +781,7 @@ var seckenPrivate = {
                     'token'     : Math.floor(Math.random()*100000)
                 },
                 'swf'      : '../../plugins/uploadify/uploadify.swf',
-                'uploader' : seckenPrivate.base_dir +'/api/web/user/import',
+                'uploader' : seckenPrivate.base_dir +'/api/index.php?d=webApi&c=User&m=import_user',
                 'buttonText': '批量导入',
                 'fileTypeExts': '*.xls;*.xlsx',
                 'sizeLimit': 2048,
@@ -831,7 +831,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/user/search',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=search',
                 data:{wd:wd,gid:this.gid, page:page},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -869,7 +869,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=index',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -902,7 +902,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'POST',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/group/getpower',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Group&m=get_power',
                 data:{gid:this.gid},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -939,7 +939,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/power',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=index',
                     data:{page:page},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
@@ -997,7 +997,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/power/search',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=search',
                 data:{power_name:wd,page:page},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1049,7 +1049,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/power/add',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=add',
                 data:{power_name:power_name,power_intro:power_intro},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1092,7 +1092,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/power/edit',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=edit',
                 data:{power_name:power_name,power_intro:power_intro,power_status:power_status,power_id:power_id},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1119,7 +1119,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/power/regenkey',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=regen_auth_key',
                 data:{id:id},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1144,7 +1144,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/power/delete',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=delete',
                 data:{power_id:power_id},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1172,7 +1172,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/stats/auth',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Statistics&m=auth_statistics',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1210,7 +1210,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/stats/date',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Statistics&m=statistics_by_date',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1250,7 +1250,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/stats/detail',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Statistics&m=statistics_info',
                 data:{power_id:power_id, page:page},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1289,7 +1289,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/power',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Power&m=index',
                 data:{},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1330,7 +1330,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/log/auth',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Log&m=auth_log',
                 data:{auth_type:auth_type,auth_result:auth_result,page:page},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1367,7 +1367,7 @@ var seckenPrivate = {
             $.ajax({
                 type:'post',
                 dataType:'jsonp',
-                url:seckenPrivate.base_dir + '/api/web/log/op',
+                url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Log&m=op_log',
                 data:{op_status:op_result,page:page},
                 jsonp:'secken_jsonp_callback',
                 beforeSend:function(){
@@ -1406,7 +1406,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/company/info',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Company&m=index',
                     data:{},
                     jsonp:'secken_jsonp_callback',
                     success:function(response){
@@ -1426,7 +1426,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/user/admin',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=User&m=get_admin_user',
                     data:{},
                     jsonp:'secken_jsonp_callback',
                     success:function(response){
@@ -1450,7 +1450,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/company/set',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Company&m=set',
                     data:{company_name:company_name},
                     jsonp:'secken_jsonp_callback',
                     success:function(response){
@@ -1475,7 +1475,7 @@ var seckenPrivate = {
             			'token'     : Math.floor(Math.random()*100000)
             		},
             		'swf'      : '../../plugins/uploadify/uploadify.swf',
-            		'uploader' : seckenPrivate.base_dir +'/api/web/company/upload',
+            		'uploader' : seckenPrivate.base_dir +'/api/index.php?d=webApi&c=Company&m=upload',
                     'buttonText': '上传图片',
                     'fileTypeExts': '*.gif; *.jpg; *.png',
                     'sizeLimit': 1024,
@@ -1495,7 +1495,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/version/info',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Version&m=get_version_info',
                     data:{},
                     jsonp:'secken_jsonp_callback',
                     success:function(response){
@@ -1524,7 +1524,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/upgrade/check',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Upgrade&m=check',
                     data:{dependent_code:dependent_code, version_code:version_code},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
@@ -1564,7 +1564,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/upgrade/download',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Upgrade&m=download',
                     data:{download:seckenPrivate.setting.upgrade.lastest_version.download},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
@@ -1590,7 +1590,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/upgrade/update',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Upgrade&m=update',
                     data:{upgrade:seckenPrivate.setting.upgrade.lastest_version},
                     jsonp:'secken_jsonp_callback',
                     beforeSend:function(){
@@ -1638,7 +1638,7 @@ var seckenPrivate = {
                 $.ajax({
                     type:'post',
                     dataType:'jsonp',
-                    url:seckenPrivate.base_dir + '/api/web/setting/check',
+                    url:seckenPrivate.base_dir + '/api/index.php?d=webApi&c=Setting&m=check_service',
                     data:{},
                     jsonp:'secken_jsonp_callback',
                     success:function(response){
