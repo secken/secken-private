@@ -90,7 +90,7 @@ var seckenPrivate = {
                     }
 
                     if(response.data.allow_next == 1){
-                        $('#next').html('<button type="button" class="btn btn-info pull-right" onclick="javascript:location.href=\'/pages/install/db.html\'">下一步</button>');
+                        $('#next').html('<button type="button" class="btn btn-info pull-right" onclick="javascript:location.href=\'db.html\'">下一步</button>');
                     }
                 },
                 error: function(response){

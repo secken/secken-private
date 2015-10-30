@@ -26,11 +26,18 @@ class Index extends API_Controller {
             'best' => '5.4 or new',
             'current' => PHP_VERSION
         );
-        $data['env']['MYSQLI扩展'] = array(
-            'need' => '与php版本对应',
-            'best' => '与php版本对应',
-            'current' => mysqli_get_client_version()
-        );
+
+        // if(function_exists('mysqli_get_client_version')){
+        //     $current = mysqli_get_client_version();
+        // }else{
+        //     $current = '未安装';
+        // }
+
+        // $data['env']['MYSQLI扩展'] = array(
+        //     'need' => '与php版本对应',
+        //     'best' => '与php版本对应',
+        //     'current' => $current
+        // );
 
 
         $gd_info = array();
@@ -114,6 +121,13 @@ class Index extends API_Controller {
         $db_user = $db_user ? $db_user : 'root';
         $db_pre = $db_pre ? $db_pre . '_' : 'pc_';
 
+        if(function_exists('mysqli_get_client_version')){
+            $dbdriver = 'mysqli';
+        }else{
+            $dbdriver = 'mysql';
+        }
+
+
         $content = <<<EOT
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -127,7 +141,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	'username' => "$db_user",
 	'password' => "$db_pwd",
 	'database' => "$db_name",
-	'dbdriver' => 'mysqli',
+	'dbdriver' => "$dbdriver",
 	'dbprefix' => "$db_pre",
 	'pconnect' => FALSE,
 	'db_debug' => TRUE,
