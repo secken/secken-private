@@ -6,9 +6,6 @@ class Index extends API_Controller {
     public function __construct(){
         parent::__construct();
 
-        if(!in_array($this->uri->segment(2), array('check', 'addconfig', 'checkinstall'))){
-            $this->load->dbforge();
-        }
     }
 
     //检查环境
@@ -211,6 +208,7 @@ EOT;
             'table_user_event', 'table_auth_statistics','table_session'
         );
 
+        $this->load->dbforge();
         foreach($current_table as $table_name){
             $this->$table_name();
         }
@@ -446,6 +444,7 @@ EOT;
             'default_group','default_version'
         );
 
+        $this->load->dbforge();
         foreach($need_default_table as $add_data_table){
             $this->$add_data_table();
         }
