@@ -31,7 +31,7 @@ class Index extends API_Controller {
 
         if(function_exists('mysqli_get_client_version')){
             $current = 'mysqli:'. mysqli_get_client_version();
-        }elseif(function_exists('mysql_get_client_version')){
+        }elseif(function_exists('mysql_get_client_info')){
             $current = 'mysql:' . mysql_get_client_info();
         }else{
             $current = '未安装';
