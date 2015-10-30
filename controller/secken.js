@@ -6,6 +6,9 @@ var seckenPrivate = {
             location.href= seckenPrivate.base_dir + "/login.html";
         }
     },
+    jumpToError:function(){
+        location.href= seckenPrivate.base_dir + "/error.html";
+    },
     checkInstall:function(){
         $.ajax({
             type:'POST',
@@ -18,6 +21,9 @@ var seckenPrivate = {
                 if(response.status == 0){
                     location.href= seckenPrivate.base_dir + '/pages/install/index.html';
                 }
+            },
+            error: function(response){
+                seckenPrivate.jumpToError();
             }
         });
     },
@@ -86,6 +92,9 @@ var seckenPrivate = {
                     if(response.data.allow_next == 1){
                         $('#next').html('<button type="button" class="btn btn-info pull-right" onclick="javascript:location.href=\'/pages/install/db.html\'">下一步</button>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             })
         },
@@ -109,6 +118,9 @@ var seckenPrivate = {
                     }else{
                         $('#tip').addClass('callout callout-danger').text(response.description).show();
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -123,6 +135,9 @@ var seckenPrivate = {
                     if(response.status == 1){
                         location.href= seckenPrivate.base_dir + '/pages/activate/index.html';
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -156,6 +171,9 @@ var seckenPrivate = {
                     }else{
                         $('#tip').addClass('callout callout-danger').text(response.description).show();
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -177,6 +195,9 @@ var seckenPrivate = {
 
                         $('.box-body').append(qrcode);
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -193,6 +214,9 @@ var seckenPrivate = {
                     }else{
                         $('#result_msg').html(response.description);
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -234,6 +258,9 @@ var seckenPrivate = {
                     }else{
                         $('#group').html('加载失败');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -271,6 +298,9 @@ var seckenPrivate = {
                     }else{
                         $('#g_tip').addClass('callout callout-danger').text(response.description).show();
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -294,6 +324,9 @@ var seckenPrivate = {
                     }else{
                         $('#eg_tip').addClass('callout callout-danger').text(response.description).show();
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
 
@@ -315,6 +348,9 @@ var seckenPrivate = {
                     }else{
                         $('#g_tip').addClass('callout callout-danger').text(response.description).show();
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -352,6 +388,9 @@ var seckenPrivate = {
                                 $('#pused').append(li);
                             }
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
             });
         },
@@ -408,6 +447,9 @@ var seckenPrivate = {
 
 
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -446,6 +488,9 @@ var seckenPrivate = {
                     }else{
                         $('#result_msg').html(response.description);
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -465,6 +510,9 @@ var seckenPrivate = {
 
                         location.href= seckenPrivate.base_dir + "/login.html";
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -517,6 +565,9 @@ var seckenPrivate = {
                         }else{
                             $('#group').html('<red>列表拉取失败</red>');
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             }else{
@@ -601,6 +652,9 @@ var seckenPrivate = {
                         $('#tip').addClass('callout callout-danger').text(response.description).show();
                         $('button[name=adduser]').removeAttr('disabled');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -634,6 +688,9 @@ var seckenPrivate = {
                         $('#e_tip').addClass('callout callout-danger').text(response.description).show();
                         $('button[name=edituser]').removeAttr('disabled');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -664,6 +721,9 @@ var seckenPrivate = {
                         alert(response.description);
                         $('button[name=delbtn]').removeAttr('disabled');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -706,6 +766,9 @@ var seckenPrivate = {
                         alert(response.description);
                         $('button[name=movebtn]').removeAttr('disabled');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -796,6 +859,9 @@ var seckenPrivate = {
                     }else{
                         $('#group').html('<red>列表拉取失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -826,6 +892,9 @@ var seckenPrivate = {
                     }else{
                         $('#groupItem').html('<red>加载失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -854,6 +923,9 @@ var seckenPrivate = {
                         $('#power_count').text(power_count);
                         $('#power_enable_count').text(power_enable_count);
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -893,6 +965,9 @@ var seckenPrivate = {
                         }else{
                             $('#power').html('<red>列表拉取失败</red>');
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             }else{
@@ -949,6 +1024,9 @@ var seckenPrivate = {
                     }else{
                         $('#power').html('<red>列表拉取失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -987,6 +1065,9 @@ var seckenPrivate = {
                         $('#tip').addClass('callout callout-danger').text(response.description).show();
                         $('button[name=addpower]').removeAttr('disabled');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1027,6 +1108,9 @@ var seckenPrivate = {
                         $('#e_tip').addClass('callout callout-danger').text(response.description).show();
                         $('button[name=setpower]').removeAttr('disabled');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1048,6 +1132,9 @@ var seckenPrivate = {
                         $('input[name=edit_powerid]').val(response.data.power_id);
                         $('input[name=edit_powerkey]').val(response.data.power_key);
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1070,6 +1157,9 @@ var seckenPrivate = {
                     }else{
                         alert(response.description);
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -1110,6 +1200,9 @@ var seckenPrivate = {
                     }else{
                         $('#pieChart').html('<red>暂无数据</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1144,6 +1237,9 @@ var seckenPrivate = {
                     }else{
                         $('#pieChart').html('<red>暂无数据</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1183,6 +1279,9 @@ var seckenPrivate = {
                     }else{
                         $('#auth_detai').html('<red>列表拉取失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1213,6 +1312,9 @@ var seckenPrivate = {
                     }else{
                         $('#power_tab').html('<red>列表拉取失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -1252,6 +1354,9 @@ var seckenPrivate = {
                     }else{
                         $('#auth_log').html('<red>列表拉取失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         },
@@ -1286,6 +1391,9 @@ var seckenPrivate = {
                     }else{
                         $('#op_log').html('<red>列表拉取失败</red>');
                     }
+                },
+                error: function(response){
+                    seckenPrivate.jumpToError();
                 }
             });
         }
@@ -1309,6 +1417,9 @@ var seckenPrivate = {
                             }
                             $('#company_name').text(response.data.company_name);
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
 
@@ -1325,6 +1436,9 @@ var seckenPrivate = {
                             $('#phone').text(response.data.phone);
                             $('#register_time').text(response.data.create_time);
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
 
@@ -1346,6 +1460,9 @@ var seckenPrivate = {
                         }else{
                             $('#tip').addClass('callout callout-danger').text(response.description).show();
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             },
@@ -1397,6 +1514,9 @@ var seckenPrivate = {
                         }else{
                             $('#tip').addClass('callout callout-danger').text('更新失败').show();
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             },
@@ -1429,6 +1549,9 @@ var seckenPrivate = {
                         }else{
                             $(obj).html('已是最新');
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             },
@@ -1457,6 +1580,9 @@ var seckenPrivate = {
                         }else{
                             $('#download_tip').html('<center>下载失败，请稍后再试！</center>');
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             },
@@ -1500,6 +1626,9 @@ var seckenPrivate = {
                         }else{
                             $('#update_tip').html('<center>更新失败，请稍后再试！</center>');
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             }
@@ -1536,6 +1665,9 @@ var seckenPrivate = {
 
                             $('#service').html(li);
                         }
+                    },
+                    error: function(response){
+                        seckenPrivate.jumpToError();
                     }
                 });
             }
