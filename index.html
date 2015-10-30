@@ -87,13 +87,13 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="/pages/power.html">
+              <a href="pages/power.html">
                 <i class="fa fa-files-o"></i>
                 <span>权限</span>
               </a>
             </li>
             <li>
-              <a href="/pages/stats.html">
+              <a href="pages/stats.html">
                 <i class="fa fa-th"></i> <span>统计</span>
               </a>
             </li>
@@ -104,8 +104,8 @@
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="/pages/logs/auth.html"><i class="fa fa-circle-o"></i>验证日志</a></li>
-                  <li><a href="/pages/logs/op.html"><i class="fa fa-circle-o"></i>操作日志</a></li>
+                  <li><a href="pages/logs/auth.html"><i class="fa fa-circle-o"></i>验证日志</a></li>
+                  <li><a href="pages/logs/op.html"><i class="fa fa-circle-o"></i>操作日志</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -115,9 +115,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="/pages/setting/company.html"><i class="fa fa-circle-o"></i>企业信息</a></li>
-                <li><a href="/pages/setting/upgrade.html"><i class="fa fa-circle-o"></i>检查更新</a></li>
-                <li><a href="/pages/setting/service.html"><i class="fa fa-circle-o"></i>服务</a></li>
+                <li class="active"><a href="pages/setting/company.html"><i class="fa fa-circle-o"></i>企业信息</a></li>
+                <li><a href="pages/setting/upgrade.html"><i class="fa fa-circle-o"></i>检查更新</a></li>
+                <li><a href="pages/setting/service.html"><i class="fa fa-circle-o"></i>服务</a></li>
               </ul>
             </li>
           </ul>
@@ -590,7 +590,7 @@ seckenPrivate.user.groupPower();
 
 
 if($.cookie('company_logo').length > 0){
-    var logo = seckenPrivate.api_url + '/resources/' + $.cookie('company_logo');
+    var logo = seckenPrivate.base_dir + '/api/resources/' + $.cookie('company_logo');
     $('.logo').html('<img src="'+logo+'" width="230" height="50">');
 }else{
 

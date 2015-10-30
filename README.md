@@ -49,6 +49,15 @@ server {
     }
 }
 
+
+配置:
+如果您的项目放在webserver的根目录，则不用理会下面的配置，如果您的项目放在webserver下的子目录中，
+请按照下方的指示进行配置：
+
+1. 例如您的项目放在了webserver/a目录下,则您需要打开webserver/a/yangcong_private/controller/secken.js
+2. 定位到第三行，将
+base_dir: '/', 配置改为     base_dir: '/a/',
+
 如何安装:
 例： admin.domain.com 指向了/var/hosts/com/domain/admin 目录
 
