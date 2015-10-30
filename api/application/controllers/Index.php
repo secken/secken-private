@@ -27,17 +27,20 @@ class Index extends API_Controller {
             'current' => PHP_VERSION
         );
 
-        // if(function_exists('mysqli_get_client_version')){
-        //     $current = mysqli_get_client_version();
-        // }else{
-        //     $current = '未安装';
-        // }
+        if(function_exists('mysqli_get_client_version')){
+            $current = 'mysqli:'. mysqli_get_client_version();
+        }elseif(function_exists('mysql_get_client_version')){
+            $current = 'mysql:' . mysql_get_client_info();
+        }else{
+            $current = '未安装';
+            $status = 0;
+        }
 
-        // $data['env']['MYSQLI扩展'] = array(
-        //     'need' => '与php版本对应',
-        //     'best' => '与php版本对应',
-        //     'current' => $current
-        // );
+        $data['env']['数据库'] = array(
+            'need' => '与php版本对应',
+            'best' => '与php版本对应',
+            'current' => $current
+        );
 
 
         $gd_info = array();
