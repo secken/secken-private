@@ -20,6 +20,13 @@ var seckenPrivate = {
 
                 if(response.status == 0){
                     location.href= seckenPrivate.base_dir + '/pages/install/index.html';
+                }else{
+                    seckenPrivate.user.getGid();
+                    seckenPrivate.group.power();
+
+                    seckenPrivate.group.getList();
+                    seckenPrivate.user.getList(1);
+                    seckenPrivate.user.groupPower();
                 }
             },
             error: function(response){
