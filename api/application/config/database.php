@@ -10,7 +10,7 @@ $db['default'] = array(
 	'username' => "root",
 	'password' => "",
 	'database' => "",
-	'dbdriver' => 'mysqli',
+	'dbdriver' => "mysql",
 	'dbprefix' => "",
 	'pconnect' => FALSE,
 	'db_debug' => TRUE,
@@ -25,6 +25,4 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-//
-
 ?>
