@@ -1,6 +1,6 @@
 //需要初始化的数据
 var seckenPrivate = {
-    base_dir: '/',
+    base_dir: '',
     jumpToLogin:function(status){
         if(status == 10000){
             location.href= seckenPrivate.base_dir + "/login.html";

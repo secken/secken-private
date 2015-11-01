@@ -21,56 +21,17 @@ rootdir
 注意: 请将nginx、php、私有云项目 的用户和组所属保持一致，比如都为www:www
 
 
-三、项目配置
-
-（1）配置方法1:
-
-如果您有权限修改nginx上配置，请参考下面配置:
-
-server {
-    listen       80;
-    server_name  admin.domain.com;
-
-    access_log  logs/wp-secken.access.log  main;
-    root /var/hosts/com/domain/admin;
-
-    location / {
-        index  index.html index.htm;
-    }
-
-    location /api/{
-        index  index.php index.html index.htm;
-
-        if ($request_filename !~ (resources|js|css|images|robots\.txt|index\.php)) {
-             rewrite ^/(.+)$ /api/index.php last;
-        }
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass   127.0.0.1:9000;
-        fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        include        fastcgi_params;
-    }
-}
-
-（2）配置方法2:(默认使用此配置)
-
-如果您没有权限修改nginx配置文件，那下面这些可能适合您。
-1. 打开controller目录将secken.qs.js替换secken.js
-2. 打开api/application.config/config.php 定位到185行
-将 $config['enable_query_strings'] = false;
-更改为 $config['enable_query_strings'] = true;
+三、二级目录配置
 
 
+若项目安装在某个域名的二级目录下，可采用以下配置方式：
 
-（3）api根目录的配置:
-如果您的项目放在webserver的根目录，则不用理会下面的配置，如果您的项目放在webserver下的子目录中，
-请按照下方的指示进行配置：
 
-1. 例如您的项目放在了webserver/a目录下,则您需要打开webserver/a/yangcong_private/controller/secken.js
-2. 定位到第三行，将
-base_dir: '/', 配置改为     base_dir: '/a/',
+如主目录为：/var/hosts/com/domain/admin
+二级目录为：/var/hosts/com/domain/admin/private
+
+修需改/var/hosts/com/domain/admin/private/controller/secken.js文件中的第三行，将
+base_dir: '', 配置改为     base_dir: '/private', 
 
 
 四、如何安装:
