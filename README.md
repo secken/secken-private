@@ -89,3 +89,8 @@ base_dir: '', 配置改为     base_dir: '/private',
 
 脚本需要每天0点来执行一次，用来统计验证信息
 /usr/local/php/bin/php /var/hosts/com/domain/admin/api/index.php webApi Cron auth_statistics
+
+
+七、安装成功之后，API地址即： http://admin.domain.com/api/access/
+
+在Raduis和LDAP代理模块的响应配置文件中的API链接改为该地址前缀。
