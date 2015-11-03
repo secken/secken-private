@@ -20,8 +20,41 @@ rootdir
 
 注意: 请将nginx、php、私有云项目 的用户和组所属保持一致，比如都为www:www
 
+三、rewrite配置
 
-三、二级目录配置
+因为受制于php CI框架限制，为了统一API的调用格式，在配置webserver时，必须针对/api的请求启用rewrite规则，以nginx为例
+
+
+server {
+    listen       80;
+    server_name  admin.domain.com;
+
+    access_log  logs/wp-secken.access.log  main;
+    root /var/hosts/com/domain/admin;
+
+    location / {
+        index  index.html index.htm;
+    }
+
+    location /api/{
+        index  index.php index.html index.htm;
+
+        if ($request_filename !~ (resources|js|css|images|robots\.txt|index\.php)) {
+             rewrite ^/(.+)$ /api/index.php last;
+        }
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+
+
+
+四、二级目录配置
 
 
 若项目安装在某个域名的二级目录下，可采用以下配置方式：
@@ -30,17 +63,27 @@ rootdir
 如主目录为：/var/hosts/com/domain/admin
 二级目录为：/var/hosts/com/domain/admin/private
 
-修需改/var/hosts/com/domain/admin/private/controller/secken.js文件中的第三行，将
+1. 修需改/var/hosts/com/domain/admin/private/controller/secken.js文件中的第三行，将
 base_dir: '', 配置改为     base_dir: '/private', 
+2. 并修改相应的rewrite配置
 
 
-四、如何安装:
+    location /private/api/{
+        index  index.php index.html index.htm;
+
+        if ($request_filename !~ (resources|js|css|images|robots\.txt|index\.php)) {
+             rewrite ^/(.+)$ /private/api/index.php last;
+        }
+    }
+
+
+五、如何安装:
 例： admin.domain.com 指向了/var/hosts/com/domain/admin 目录
 
 打开admin.domain.com 会自动跳转到安装页面、按顺序安装即可。
 
 
-五、需要执行的脚本：
+六、需要执行的脚本：
 
 例:项目放在了:/var/hosts/com/domain/admin, php的执行目录为:/usr/local/php/bin/php
 
