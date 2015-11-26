@@ -2,6 +2,7 @@ Introduction
 ============
 
 一、目录结构:
+```
 rootdir
   |
   |--api        私有云接口目录，php接口所在目录
@@ -12,6 +13,7 @@ rootdir
   |--plugins    前端开发相关插件
   |--index.html 首页
   |--login.html 登录
+```
 
 二、依赖环境:
 1.服务器:建议使用类Unix系统
@@ -64,7 +66,7 @@ server {
 二级目录为：/var/hosts/com/domain/admin/private
 
 1. 修需改/var/hosts/com/domain/admin/private/controller/secken.js文件中的第三行，将
-base_dir: '', 配置改为     base_dir: '/private', 
+base_dir: '', 配置改为     base_dir: '/private',
 2. 并修改相应的rewrite配置
 
 
