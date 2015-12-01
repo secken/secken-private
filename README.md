@@ -101,8 +101,8 @@ base_dir: '', 配置改为     base_dir: '/private',
 
 Script has been tested on:
 
-- Miscrosoft Azure: Ubuntu 14.04 x64 (Trusty)
-- Miscrosoft Azure: CentOS 7.0 (Trusty)
+- Microsoft Azure: Ubuntu 14.04 x64 (Trusty)
+- Microsoft Azure: CentOS 7.0 (Trusty)
 
 **Feel free to test it on more distributions and please report back to me!**
 
