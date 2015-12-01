@@ -96,3 +96,30 @@ base_dir: '', 配置改为     base_dir: '/private',
 七、安装成功之后，API地址即： http://admin.domain.com/api/access/
 
 在Raduis和LDAP代理模块的响应配置文件中的API链接改为该地址前缀。
+
+# Setup a simple Secken Private System for Ubuntu, CentOS
+
+Script has been tested on:
+
+- Miscrosoft Azure: Ubuntu 14.04 x64 (Trusty)
+- Miscrosoft Azure: CentOS 7.0 (Trusty)
+
+**Feel free to test it on more distributions and please report back to me!**
+
+Copyright (C) 2014-2015 Secken, Inc. <support@secken.com><br>
+
+# Installation
+
+## For Ubuntu and Debian
+
+```
+wget https://github.com/secken/secken-private/raw/master/pages/install/setup.sh
+sudo sh setup.sh
+```
+## For CentOS
+
+```
+sudo yum install wget
+wget https://github.com/secken/secken-private/raw/master/pages/install/setup.sh
+sudo sh setup.sh
+```
