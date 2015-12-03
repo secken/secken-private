@@ -1,3 +1,5 @@
+$.ajaxSetup({async: false});
+
 //需要初始化的数据
 var seckenPrivate = {
     base_dir: '',
@@ -20,7 +22,9 @@ var seckenPrivate = {
 
                 if(response.status == 0){
                     location.href= seckenPrivate.base_dir + '/pages/install/index.html';
-                }else{
+                }else if(/\/pages\/install\//.test(location.pathname)) {
+                    location.href = seckenPrivate.base_dir + '/';
+                }else {
                     seckenPrivate.user.getGid();
                     seckenPrivate.group.power();
 

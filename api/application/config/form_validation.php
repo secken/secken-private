@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             array(
                 'field' => 'host_name',
                 'label' => 'lang:host_name',
-                'rules' => 'trim|valid_ip',
+                'rules' => 'trim|valid_url',
             ),
             array(
                 'field' => 'db_name',
@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             array(
                 'field' => 'db_user',
                 'label' => 'lang:db_user',
-                'rules' => 'trim|alpha',
+                'rules' => 'trim|alpha_dash',
             ),
             array(
                 'field' => 'db_pre',

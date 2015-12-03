@@ -27,6 +27,12 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>#power td a{margin-right: 1em}</style>
+
+    <!-- jQuery 2.1.4 -->
+    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Controller -->
+    <script src="../controller/secken.js" type="text/javascript"></script>
+    <script>seckenPrivate.checkInstall();</script>
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -51,36 +57,11 @@
                   <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs" id="show_true_name"></span>
                 </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
-                    </p>
-                  </li>
-                  <!-- Menu Body -->
-                  <li class="user-body">
-                    <div class="row">
-                      <div class="col-xs-4 text-center">
-                        <a href="#">Followers</a>
-                      </div>
-                      <div class="col-xs-4 text-center">
-                        <a href="#">Sales</a>
-                      </div>
-                      <div class="col-xs-4 text-center">
-                        <a href="#">Friends</a>
-                      </div>
-                    </div><!-- /.row -->
-                  </li>
+                <ul class="dropdown-menu" style="width:107px;min-width:107px;">
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat" onclick="javascript:seckenPrivate.user.logout();">Sign out</a>
+                      <a href="#" class="btn btn-default btn-flat" onclick="javascript:seckenPrivate.user.logout();">退出</a>
                     </div>
                   </li>
                 </ul>
@@ -207,8 +188,6 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery cookie -->
     <script src="../plugins/jQuery/jquery.cookie.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -224,8 +203,6 @@
     <script src="../dist/js/app.min.js"></script>
     <!-- Bootstrap-switch -->
     <script src="../plugins/switch/bootstrap-switch.min.js" type="text/javascript"></script>
-    <!-- Controller -->
-    <script src="../controller/secken.js" type="text/javascript"></script>
     <script>
     seckenPrivate.power.getList(1);
 
