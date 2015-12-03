@@ -19,12 +19,16 @@ var seckenPrivate = {
             data:{},
             jsonp:'secken_jsonp_callback',
             success:function(response){
-
+                if(/\/pages\/install\//.test(location.pathname)) {
+                    if(response.status != 0) {
+                        location.href = seckenPrivate.base_dir + '/';
+                    }
+                    return;
+                }
+                
                 if(response.status == 0){
                     location.href= seckenPrivate.base_dir + '/pages/install/index.html';
-                }else if(/\/pages\/install\//.test(location.pathname)) {
-                    location.href = seckenPrivate.base_dir + '/';
-                }else {
+                }else{
                     seckenPrivate.user.getGid();
                     seckenPrivate.group.power();
 
