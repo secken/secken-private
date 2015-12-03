@@ -44,7 +44,7 @@ server="server {\n\
     \t}\n\
 }\n\
 "
-echo -e $server >> /usr/local/nginx/conf/vhost/$domain.conf
+echo -e "$server" >> /usr/local/nginx/conf/vhost/$domain.conf
 /usr/local/nginx/sbin/nginx -s reload
 #/usr/local/mysql/bin/mysql -uroot -p$MyMysqlRootPWD -e 'create database yangcong;'
 #/usr/local/mysql/bin/mysql -uroot -p$MyMysqlRootPWD -e 'CREATE USER yangcong@localhost IDENTIFIED BY "yangcongabc";'
