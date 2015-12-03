@@ -19,13 +19,13 @@ var seckenPrivate = {
             data:{},
             jsonp:'secken_jsonp_callback',
             success:function(response){
-                if(/\/pages\/install\//.test(location.pathname)) {
+                if(/\/pages\/(install|activate)\//.test(location.pathname)) {
                     if(response.status != 0) {
                         location.href = seckenPrivate.base_dir + '/';
                     }
                     return;
                 }
-                
+
                 if(response.status == 0){
                     location.href= seckenPrivate.base_dir + '/pages/install/index.html';
                 }else{
@@ -479,6 +479,7 @@ var seckenPrivate = {
                 url:seckenPrivate.base_dir + '/api/web/setting/getresult',
                 data:{event_id:event_id},
                 jsonp:'secken_jsonp_callback',
+                async: true,
                 success:function(response){
                     if(response.status == 1){
                         $.ajax({
@@ -487,6 +488,7 @@ var seckenPrivate = {
                             url:seckenPrivate.base_dir + '/api/web/user/savesess',
                             data:{service_type:response.data.service_type, identity_name:response.data.identity_name},
                             jsonp:'secken_jsonp_callback',
+                            async: true,
                             success:function(response){
                                 if(response.status == 1){
                                     $.cookie('user_id', response.data.user_id);

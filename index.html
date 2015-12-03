@@ -582,7 +582,7 @@
 </div>
 <!--导入用户结果-->
 <script>
-
+seckenPrivate.checkInstall();
 if($.cookie('company_logo').length > 0){
     var logo = seckenPrivate.base_dir + '/api/resources/' + $.cookie('company_logo');
     $('.logo').html('<img src="'+logo+'" width="230" height="50">');
