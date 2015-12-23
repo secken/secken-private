@@ -30,4 +30,13 @@ class User_model extends CI_Model {
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function get_username_by_yangcong_uid($uid){
+        $this->db->select('user_name');
+        $this->db->from($this->_main_table);
+        $this->db->where('yangcong_uid', $uid);
+
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

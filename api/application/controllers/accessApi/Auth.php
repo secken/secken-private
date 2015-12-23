@@ -91,7 +91,7 @@ class Auth extends API_Controller{
      *
      */
     public function qrcode_for_auth(){
-        $username = $this->input->post('username', TRUE);
+
         $auth_type = $this->input->post('auth_type', TRUE);
         $callback = $this->input->post('callback',TRUE);
 
@@ -102,16 +102,10 @@ class Auth extends API_Controller{
         $auth['description'] = $this->secken->getMessage();
 
         $code = $this->secken->getCode();
-        log_message('DEBUG', sprintf("%s--username:%s,code:%s", $this->session_id, $username, $code));
+        log_message('DEBUG', sprintf("%s--get qrcode,code:%s", $this->session_id, $code));
 
-        if($code == 200){
-            //添加用户事件
-            $this->add_event($username,$auth['event_id']);
-            log_message('DEBUG', sprintf("%s--qrcode_for_auth---username:%s, event_id:%s", $this->session_id, $username, $auth['event_id']));
-            $this->add_auth_log($username, $auth_type, $this->power_id, $auth['event_id']);
-        }else{
-            log_message('DEBUG', sprintf("%s--qrcode_for_auth_result:%s", $this->session_id, json_encode($auth)));
-        }
+        log_message('DEBUG', sprintf("%s--
+        _result:%s", $this->session_id, json_encode($auth)));
 
         echo json_encode($auth);
     }
@@ -194,6 +188,38 @@ class Auth extends API_Controller{
             log_message('DEBUG', sprintf("%s--event_result:%s", $this->session_id, json_encode($result)));
         }
 
+        echo json_encode($result);
+    }
+
+    /**
+     * 获取二维码事件结果
+     * @param  string event_id  事件ID
+     * @return json
+     */
+    public function event_qrcode_result(){
+
+        $event_id = $this->input->post('event_id', TRUE);
+        $result = $this->secken->getResult($event_id);
+        $respone_code = $this->secken->getCode();
+        if($respone_code == 200){
+            $this->load->model('accessModel/User_model','user');
+            $user_info = $this->user->get_username_by_yangcong_uid($result['uid']);
+            $this->load->model('accessModel/Power_model','power');
+            $id = $this->power->get_by_power_id($this->power_id);
+
+            $check = $this->check_power($id["id"], $user_info["user_name"]);
+            if($check === FALSE){
+                log_message('ERROR', sprintf("%s--%s wang to access by scan qrcode, but status:%s", $this->session_id, $user_info["user_name"], 900));
+                $new_result['status'] = 900;
+                $new_result['description'] = $this->lang->line('900');
+                $result = $new_result;
+            }
+            //添加验证结果
+            $this->load->model('accessModel/Auth_log','auth_log');
+            $this->auth_log->update_event_result($event_id, 1);
+        } else {
+            log_message('DEBUG', sprintf("%s--event_result:%s", $this->session_id, json_encode($result)));
+        }
         echo json_encode($result);
     }
 

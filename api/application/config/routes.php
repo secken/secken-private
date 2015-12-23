@@ -112,5 +112,6 @@ $route['web/version/info'] = 'webApi/Version/get_version_info'; //版本信息
 
 /*accessApi接口*/
 $route['access/qrcode_for_auth'] = 'accessApi/Auth/qrcode_for_auth'; //获取登录二维码
+$route['access/event_qrcode_result'] = 'accessApi/Auth/event_qrcode_result'; //获取登录二维码扫描结果
 $route['access/realtime_authorization'] = 'accessApi/Auth/realtime_authorization'; //认证推送
 $route['access/event_result'] = 'accessApi/Auth/event_result'; //获取事件结果
