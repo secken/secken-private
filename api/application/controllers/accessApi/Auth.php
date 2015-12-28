@@ -141,8 +141,6 @@ class Auth extends API_Controller{
 
         $code = $this->secken->getCode();
         if($code == 200){
-            //添加用户事件
-            $this->add_event($username,$realtime['event_id']);
             log_message('DEBUG', sprintf("%s--username:%s, event_id:%s", $this->session_id, $username, $realtime['event_id']));
             $this->add_auth_log($username, $auth_type, $this->power_id, $realtime['event_id']);
         }else{
@@ -157,47 +155,7 @@ class Auth extends API_Controller{
      * @param  string event_id  事件ID
      * @return json
      */
-    public function event_result(){
-        $event_id = $this->input->post('event_id', TRUE);
-
-        $result = $this->secken->getResult($event_id);
-        $result['description'] = $this->secken->getMessage();
-        $respone_code = $this->secken->getCode();
-        log_message('DEBUG', sprintf("%s--event_id:%s", $this->session_id,$event_id));
-        if($respone_code == 200){
-            $this->load->model('accessModel/User_event','user_event');
-            $get = $this->user_event->get($event_id);
-            if(empty($get)){
-                log_message('ERROR', sprintf("%s--status:%s", $this->session_id, 901));
-                $result['status'] = 604;
-                $result['description'] = $this->lang->line('901');
-            }
-
-            //检测权限
-            $check = $this->check_power($get['power_id'], $get['user_name']);
-            if($check === FALSE){
-                log_message('ERROR', sprintf("%s--status:%s", $this->session_id, 900));
-                $result['status'] = 900;
-                $result['description'] = $this->lang->line('900');
-            }
-
-            //添加验证结果
-            $this->load->model('accessModel/Auth_log','auth_log');
-            $this->auth_log->update_event_result($event_id, 1);
-        }else{
-            log_message('DEBUG', sprintf("%s--event_result:%s", $this->session_id, json_encode($result)));
-        }
-
-        echo json_encode($result);
-    }
-
-    /**
-     * 获取二维码事件结果
-     * @param  string event_id  事件ID
-     * @return json
-     */
-    public function event_qrcode_result(){
-
+    public function event_result() {
         $event_id = $this->input->post('event_id', TRUE);
         $result = $this->secken->getResult($event_id);
         $respone_code = $this->secken->getCode();
