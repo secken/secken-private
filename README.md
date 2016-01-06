@@ -39,6 +39,25 @@ wget https://github.com/secken/secken-private/raw/master/pages/install/setup.sh
 sudo sh setup.sh
 ```
 
+# 手动安装资源
+
+## 国内外安装源：
+你可以根据自己的安装环境，使用以下指令下载最新的程序：
+1. 国际版安装源：
+```
+wget -c https://github.com/secken/secken-private/archive/master.zip -O secken_private_cloud.zip --no-check-certificate
+```
+2. 中国版安装源：
+```
+wget -c https://coding.net/u/secken/p/secken-private/git/archive/master.zip -O secken_private_cloud.zip --no-check-certificate
+```
+
+## 国内外镜像源
+1. 国际版镜像源：
+https://github.com/secken/secken-private
+2. 中国版镜像源：
+https://coding.net/u/secken/p/secken-private
+
 # 手动安装指南
 
 ## 目录结构:
