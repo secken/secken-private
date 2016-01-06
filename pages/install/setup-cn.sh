@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget -c http://soft.vpser.net/lnmp/lnmp1.2-full.tar.gz
+wget -c https://api.sinas3.com/v1/SAE_lnmp/soft/lnmp1.2-full.tar.gz --no-check-certificate
 tar zxf lnmp1.2-full.tar.gz
 cd lnmp1.2-full
 
