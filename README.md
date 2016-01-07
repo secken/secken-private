@@ -1,5 +1,4 @@
-洋葱企业内网验证系统安装指南
-============
+# 洋葱企业内网验证系统安装指南
 
 # 快速安装脚本
 
@@ -159,8 +158,25 @@ base_dir: '', 配置改为     base_dir: '/private',
 
 在Raduis和LDAP代理模块的响应配置文件中的API链接改为该地址前缀。
 
-### 联系我们
+ 
+
+# 相关配套资源
+
+## 接口文档
+[洋葱企业内网验证系统服务端API](blob/master/doc/apidocument.md)
+
+## App下载
+https://www.yangcong.com/download#/private
+
+## 扫码下载
+
+![扫码下载](https://dn-yangcong.qbox.me/images/outer/download/download_qr.png)
+
+## 演示站点：
+http://demo.iam.yangcong.com
+
+# 联系我们
 
 技术支持：<support@secken.com><br>
 洋葱官网：https://www.yangcong.com<br>
-Copyright (C) 2014-2015 Secken, Inc. 
+Copyright (C) 2014-2015 Secken, Inc.
