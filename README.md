@@ -163,7 +163,7 @@ base_dir: '', 配置改为     base_dir: '/private',
 # 相关配套资源
 
 ## 接口文档
-[洋葱企业内网验证系统服务端API](blob/master/doc/apidocument.md)
+[洋葱企业内网验证系统服务端API](doc/apidocument.md)
 
 ## App下载
 https://www.yangcong.com/download#/private
