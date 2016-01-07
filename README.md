@@ -129,6 +129,7 @@ server {
 1. 修需改/var/hosts/com/domain/admin/private/controller/secken.js文件中的第三行，将
 base_dir: '', 配置改为     base_dir: '/private',
 2. 并修改相应的rewrite配置
+
 ```
 
     location /private/api/{
@@ -140,6 +141,7 @@ base_dir: '', 配置改为     base_dir: '/private',
     }
 
 ```
+
 ### 如何安装:
 例： admin.domain.com 指向了/var/hosts/com/domain/admin 目录
 
