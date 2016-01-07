@@ -87,7 +87,7 @@ rootdir
 
 因为受制于php CI框架限制，为了统一API的调用格式，在配置webserver时，必须针对/api的请求启用rewrite规则，以nginx为例
 
-
+```
 server {
     listen       80;
     server_name  admin.domain.com;
@@ -114,7 +114,7 @@ server {
         include        fastcgi_params;
     }
 }
-
+```
 
 
 ### 二级目录配置
@@ -129,7 +129,7 @@ server {
 1. 修需改/var/hosts/com/domain/admin/private/controller/secken.js文件中的第三行，将
 base_dir: '', 配置改为     base_dir: '/private',
 2. 并修改相应的rewrite配置
-
+```
 
     location /private/api/{
         index  index.php index.html index.htm;
@@ -139,7 +139,7 @@ base_dir: '', 配置改为     base_dir: '/private',
         }
     }
 
-
+```
 ### 如何安装:
 例： admin.domain.com 指向了/var/hosts/com/domain/admin 目录
 
@@ -154,11 +154,10 @@ base_dir: '', 配置改为     base_dir: '/private',
 /usr/local/php/bin/php /var/hosts/com/domain/admin/api/index.php webApi Cron auth_statistics
 
 
-### 安装成功之后，API地址即： http://admin.domain.com/api/access/
+### 安装成功之后，API地址即： 
+http://admin.domain.com/api/access/
 
 在Raduis和LDAP代理模块的响应配置文件中的API链接改为该地址前缀。
-
- 
 
 # 相关配套资源
 
